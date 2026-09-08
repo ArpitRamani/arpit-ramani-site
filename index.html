@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Arpit Ramani</title>
+<meta name="description" content="Arpit Ramani — foundational ML and -omics. Computer science at Georgia Tech.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Icon symbols, referenced by <use> from the project cards. -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.3 2.5 3.5 5.8 3.5 9.2s-1.2 6.7-3.5 9.2c-2.3-2.5-3.5-5.8-3.5-9.2S9.7 5.3 12 2.8z"/></g></symbol>
+  </defs>
+</svg>
+
+<!-- Tab state. Radios rather than JavaScript: the panels are switched by
+     :checked in CSS, so the tabs work with scripting off and stay keyboard
+     operable. They must stay here, as siblings *before* <main>. -->
+<input class="tabstate" type="radio" name="tab" id="tab-corporate" checked>
+<input class="tabstate" type="radio" name="tab" id="tab-fun">
+
+<main>
+
+  <div class="handlebar">
+    <!-- Deliberately a background-image on a link, not an <img>: there is no
+         image element for a browser to offer "Open image in new tab" on. This
+         is deterrence, not protection — the file is still at avatar.jpg. -->
+    <a class="avatar" href="https://www.instagram.com/aramani07/"
+       aria-label="Arpit Ramani on Instagram"></a>
+    <a class="handle" href="https://www.instagram.com/aramani07/">@aramani07</a>
+  </div>
+
+  <header>
+    <h1>Arpit Ramani</h1>
+    <p class="lede">Foundational ML + -omics</p>
+
+    <nav class="iconlinks" aria-label="Links">
+      <a href="mailto:arpit.ramani07@gmail.com" aria-label="Email" title="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="5" width="18.8" height="14" rx="2.4"/><path d="m3.2 7 8.8 6.2L20.8 7"/></svg>
+      </a>
+      <a href="resume.pdf" aria-label="Resume" title="Resume (PDF)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2.9H7.4a2 2 0 0 0-2 2v14.2a2 2 0 0 0 2 2h9.2a2 2 0 0 0 2-2V7.6z"/><path d="M13.8 3v4.6h4.6"/><path d="M8.8 12.6h6.4M8.8 16h4.4"/></svg>
+      </a>
+      <a href="https://github.com/ArpitRamani" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 24 24" class="solid" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/arpit-ramani-90697730b/" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" class="solid" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.75-2.05 4 0 4.75 2.6 4.75 6V21h-4v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.07 1.38-2.07 2.8V21H9z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/aramani07/" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </nav>
+
+    <nav class="tabs" aria-label="Sections">
+      <label for="tab-corporate">corporate</label>
+      <label for="tab-fun">fun</label>
+    </nav>
+  </header>
+
+  <div class="panels">
+
+    <!-- ============================= CORPORATE ============================= -->
+    <div class="panel corporate">
+
+      <section>
+        <h2>Experience</h2>
+        <ul class="rows">
+          <li>
+            <img class="mark" src="logos/finaldose.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://finaldose.ai">Finaldose<span class="ext" aria-hidden="true">↗</span></a><span class="yc">Y Combinator P26</span>
+              <span class="sub">Machine Learning Engineer Intern</span>
+            </span>
+            <span class="when">2026 &ndash; now</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/emory.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://yanglab-emory.github.io/">Emory, Yang Lab<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">Computational Genomics Research Intern</span>
+            </span>
+            <span class="when">2024 &ndash; now</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/emory.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://med.emory.edu/departments/biochemistry/research-labs/roberts/index.html">Emory, Roberts Lab<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">Computational Proteomics Research Intern</span>
+            </span>
+            <span class="when">2025 &ndash; 2026</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/bu.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://www.bu.edu/summer/high-school-programs/rise/">BU, School of Medicine<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">RISE Research Intern</span>
+            </span>
+            <span class="when">2025</span>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        <div class="cards">
+
+          <article class="card">
+            <h3>Eidola</h3>
+            <p>Multi-tenant memory app with 106 active users.</p>
+            <p class="skills"><span>Next.js</span><span>FastAPI</span><span>pgvector</span><span>Cloud Run</span><span>Swift</span></p>
+            <div class="cardfoot">
+              <a href="https://www.eidola.me" aria-label="Eidola website" title="eidola.me"><svg class="ico"><use href="#i-web"/></svg></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>BGW-TWAS Fine-Mapping</h3>
+            <p>Gene-level fine-mapping across 789k GWAS samples on Slurm arrays.</p>
+            <p class="skills"><span>R</span><span>Slurm</span><span>GWAS</span><span>TWAS</span><span>PWAS</span></p>
+            <div class="cardfoot">
+              <a href="https://github.com/ArpitRamani/BGW-TWAS-PWAS-on-AD-dementia" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Cas9 Insertion Tolerance</h3>
+            <p>Calibrated protein engineering that abstains outside measured support.</p>
+            <p class="skills"><span>Python</span><span>scikit-learn</span><span>BART</span><span>DCA</span></p>
+            <div class="cardfoot">
+              <a href="https://github.com/ArpitRamani/cas9-domain-insertion-tolerance" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>ALS Spinal Cord Proteomics</h3>
+            <p>Differential expression over a sparse 34-patient cohort in R.</p>
+            <p class="skills"><span>R</span><span>limma</span><span>TAMPOR</span><span>FragPipe</span></p>
+            <div class="cardfoot">
+              <a href="https://github.com/ArpitRamani/Ramani-McEachinSpinalCord-RAnalysis" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Nitration MD</h3>
+            <p>Distributed molecular dynamics on AWS ParallelCluster GPU arrays.</p>
+            <p class="skills"><span>OpenMM</span><span>CUDA</span><span>AMBER</span><span>Slurm</span></p>
+            <div class="cardfoot">
+              <a href="https://github.com/ArpitRamani/nitration-md" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Ferromilab</h3>
+            <p>Bispecific antibody design against the hepcidin&ndash;ferroportin interface.</p>
+            <p class="skills"><span>AlphaFold</span><span>Rosetta</span><span>HADDOCK</span><span>QM/MM</span></p>
+            <div class="cardfoot">
+              <a href="https://isef.net/project/cbio006-biclonal-antibodies-to-prevent-ferroptosis-in-ad" aria-label="Project page" title="ISEF"><svg class="ico"><use href="#i-web"/></svg></a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <ul class="rows">
+          <li>
+            <img class="mark" src="logos/gatech.svg" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://www.gatech.edu">Georgia Tech<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">B.S. Computer Science, Theory and AI</span>
+            </span>
+            <span class="when">2029</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/wheeler.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://www.wheelermagnet.com/">Wheeler Magnet School<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">Advanced Mathematics and Sciences</span>
+            </span>
+            <span class="when">2022 &ndash; 2026</span>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Awards</h2>
+        <ul class="rows">
+          <li>
+            <img class="mark" src="logos/isef.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://isef.net/project/cbio006-biclonal-antibodies-to-prevent-ferroptosis-in-ad">Regeneron ISEF, 3rd Place Grand Award<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">Computational Biology</span>
+            </span>
+            <span class="when">2025</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/isef.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://isef.net/project/cbio028-bdnf-transcytosis-for-alzheimers-treatment">Regeneron ISEF, 2&times; International Finalist<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">Computational Biology</span>
+            </span>
+            <span class="when">2024, 2025</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/ashg.png" alt="" width="32" height="32">
+            <span class="what">
+              <span class="title plain">ASHG Annual Meeting</span>
+              <span class="sub">First-author abstract accepted</span>
+            </span>
+            <span class="when">2026</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/sfn.png" alt="" width="32" height="32">
+            <span class="what">
+              <a class="title" href="https://www.sfn.org/-/media/SfN/Documents/NEW-SfN/Meetings/Neuroscience-2025/Abstracts-and-Sessions/Abstract-PDFs/SFN25_Abstracts-PDF-LB_Final.pdf">Society for Neuroscience<span class="ext" aria-hidden="true">↗</span></a>
+              <span class="sub">Neuroscience 2025 abstract</span>
+            </span>
+            <span class="when">2025</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/aan.png" alt="" width="32" height="32">
+            <span class="what">
+              <span class="title plain">American Academy of Neurology</span>
+              <span class="sub">Invited presentation</span>
+            </span>
+            <span class="when">2025</span>
+          </li>
+          <li>
+            <img class="mark" src="logos/yc.png" alt="" width="32" height="32">
+            <span class="what">
+              <span class="title plain">Y Combinator Startup School</span>
+              <span class="sub">~7% admit cohort, $25,000 in cloud credits</span>
+            </span>
+            <span class="when">2026</span>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Tools</h2>
+        <dl class="tools">
+          <dt>Languages</dt>
+          <dd>Python, TypeScript, Swift, R, SQL, Bash</dd>
+          <dt>ML</dt>
+          <dd>PyTorch, scikit-learn, gradient boosting, Bayesian methods, NumPy</dd>
+          <dt>Bio</dt>
+          <dd>FragPipe, limma, TAMPOR, OpenMM, Rosetta, AlphaFold, HADDOCK</dd>
+          <dt>Infra</dt>
+          <dd>Docker, Kubernetes, AWS, Cloud Run, Slurm, CUDA, Linux</dd>
+          <dt>Web</dt>
+          <dd>Next.js, React, FastAPI, Postgres, pgvector, Supabase, Stripe</dd>
+        </dl>
+      </section>
+
+    </div>
+
+    <!-- ================================ FUN ================================ -->
+    <div class="panel fun">
+      <section>
+        <h2>movies</h2>
+        <div class="grid">
+          <figure class="tile fav" aria-label="favorite">
+            <div class="fave" aria-hidden="true">
+              <span class="favetext">my current favorite!</span>
+              <svg class="favearrow" viewBox="0 0 40 42"><path d="M20 4 L20 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M20 38 L11 21 L29 21 Z" fill="currentColor"/></svg>
+            </div>
+            <div class="art"><img src="art/film-scarface.jpg" alt="scarface" loading="lazy" width="240" height="360"></div>
+            <figcaption>scarface<span class="meta">1983</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-the-godfather.jpg" alt="the godfather" loading="lazy" width="240" height="360"></div>
+            <figcaption>the godfather<span class="meta">1972</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-the-godfather-part-ii.jpg" alt="the godfather part ii" loading="lazy" width="240" height="360"></div>
+            <figcaption>the godfather part ii<span class="meta">1974</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-goodfellas.jpg" alt="goodfellas" loading="lazy" width="240" height="360"></div>
+            <figcaption>goodfellas<span class="meta">1990</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-once-upon-a-time-in-america.jpg" alt="once upon a time in america" loading="lazy" width="240" height="360"></div>
+            <figcaption>once upon a time in america<span class="meta">1984</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-casino.jpg" alt="casino" loading="lazy" width="240" height="360"></div>
+            <figcaption>casino<span class="meta">1995</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-mean-streets.jpg" alt="mean streets" loading="lazy" width="240" height="360"></div>
+            <figcaption>mean streets<span class="meta">1973</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-carlito-s-way.jpg" alt="carlito&#x27;s way" loading="lazy" width="240" height="360"></div>
+            <figcaption>carlito&#x27;s way<span class="meta">1993</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-a-bronx-tale.jpg" alt="a bronx tale" loading="lazy" width="240" height="360"></div>
+            <figcaption>a bronx tale<span class="meta">1993</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-donnie-brasco.jpg" alt="donnie brasco" loading="lazy" width="240" height="360"></div>
+            <figcaption>donnie brasco<span class="meta">1997</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-the-untouchables.jpg" alt="the untouchables" loading="lazy" width="240" height="360"></div>
+            <figcaption>the untouchables<span class="meta">1987</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-heat.jpg" alt="heat" loading="lazy" width="240" height="360"></div>
+            <figcaption>heat<span class="meta">1995</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-the-departed.jpg" alt="the departed" loading="lazy" width="240" height="360"></div>
+            <figcaption>the departed<span class="meta">2006</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-serpico.jpg" alt="serpico" loading="lazy" width="240" height="360"></div>
+            <figcaption>serpico<span class="meta">1973</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/film-american-gangster.jpg" alt="american gangster" loading="lazy" width="240" height="360"></div>
+            <figcaption>american gangster<span class="meta">2007</span></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>books</h2>
+        <div class="grid">
+          <figure class="tile fav" aria-label="favorite">
+            <div class="fave" aria-hidden="true">
+              <span class="favetext">my current favorite!</span>
+              <svg class="favearrow" viewBox="0 0 40 42"><path d="M20 4 L20 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M20 38 L11 21 L29 21 Z" fill="currentColor"/></svg>
+            </div>
+            <div class="art"><img src="art/book-white-nights.jpg" alt="white nights" loading="lazy" width="240" height="360"></div>
+            <figcaption>white nights<span class="meta">dostoevsky</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-1984.jpg" alt="1984" loading="lazy" width="240" height="360"></div>
+            <figcaption>1984<span class="meta">orwell</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-brave-new-world.jpg" alt="brave new world" loading="lazy" width="240" height="360"></div>
+            <figcaption>brave new world<span class="meta">huxley</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-crime-and-punishment.jpg" alt="crime and punishment" loading="lazy" width="240" height="360"></div>
+            <figcaption>crime and punishment<span class="meta">dostoevsky</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-trial.jpg" alt="the trial" loading="lazy" width="240" height="360"></div>
+            <figcaption>the trial<span class="meta">kafka</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-fahrenheit-451.jpg" alt="fahrenheit 451" loading="lazy" width="240" height="360"></div>
+            <figcaption>fahrenheit 451<span class="meta">bradbury</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-notes-from-underground.jpg" alt="notes from underground" loading="lazy" width="240" height="360"></div>
+            <figcaption>notes from underground<span class="meta">dostoevsky</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-metamorphosis.jpg" alt="the metamorphosis" loading="lazy" width="240" height="360"></div>
+            <figcaption>the metamorphosis<span class="meta">kafka</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-animal-farm.jpg" alt="animal farm" loading="lazy" width="240" height="360"></div>
+            <figcaption>animal farm<span class="meta">orwell</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-brothers-karamazov.jpg" alt="the brothers karamazov" loading="lazy" width="240" height="360"></div>
+            <figcaption>the brothers karamazov<span class="meta">dostoevsky</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-castle.jpg" alt="the castle" loading="lazy" width="240" height="360"></div>
+            <figcaption>the castle<span class="meta">kafka</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-no-longer-human.jpg" alt="no longer human" loading="lazy" width="240" height="360"></div>
+            <figcaption>no longer human<span class="meta">dazai</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-idiot.jpg" alt="the idiot" loading="lazy" width="240" height="360"></div>
+            <figcaption>the idiot<span class="meta">dostoevsky</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-meditations.jpg" alt="meditations" loading="lazy" width="240" height="360"></div>
+            <figcaption>meditations<span class="meta">marcus aurelius</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-demons.jpg" alt="demons" loading="lazy" width="240" height="360"></div>
+            <figcaption>demons<span class="meta">dostoevsky</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-a-hunger-artist.jpg" alt="a hunger artist" loading="lazy" width="240" height="360"></div>
+            <figcaption>a hunger artist<span class="meta">kafka</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-old-man-and-the-sea.jpg" alt="the old man and the sea" loading="lazy" width="240" height="360"></div>
+            <figcaption>the old man and the sea<span class="meta">hemingway</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-gambler.jpg" alt="the gambler" loading="lazy" width="240" height="360"></div>
+            <figcaption>the gambler<span class="meta">dostoevsky</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-dead-souls.jpg" alt="dead souls" loading="lazy" width="240" height="360"></div>
+            <figcaption>dead souls<span class="meta">gogol</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-anna-karenina.jpg" alt="anna karenina" loading="lazy" width="240" height="360"></div>
+            <figcaption>anna karenina<span class="meta">tolstoy</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-the-death-of-ivan-ilyich.jpg" alt="the death of ivan ilyich" loading="lazy" width="240" height="360"></div>
+            <figcaption>the death of ivan ilyich<span class="meta">tolstoy</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <div class="art"><img src="art/book-steppenwolf.jpg" alt="steppenwolf" loading="lazy" width="240" height="360"></div>
+            <figcaption>steppenwolf<span class="meta">hesse</span></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>teams i support</h2>
+        <div class="teams">
+          <figure class="team"><img src="logos/team-arsenal.png" alt="Arsenal" width="72" height="72"><figcaption>arsenal</figcaption></figure>
+          <figure class="team"><img src="logos/team-real-madrid.png" alt="Real Madrid" width="72" height="72"><figcaption>real madrid</figcaption></figure>
+          <figure class="team"><img src="logos/team-bayern.png" alt="Bayern Munich" width="72" height="72"><figcaption>bayern munich</figcaption></figure>
+          <figure class="team"><img src="logos/team-atlanta-united.png" alt="Atlanta United" width="72" height="72"><figcaption>atlanta united</figcaption></figure>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+
+</main>
+</body>
+</html>

@@ -1,0 +1,472 @@
+/* ---------------------------------------------------------------------------
+   Arpit Ramani — personal site
+   Dark only. No JavaScript: the corporate/fun tabs are radio inputs switched
+   by :checked.
+
+   Color: monochrome on purpose. Three attempts at an accent (amber, aqua,
+   orange) all fought the artwork, and the page now carries real institution
+   logos and thirty book covers and film posters, which bring plenty of color of
+   their own. So the interface is white through grey, and hierarchy comes from
+   weight and size instead of hue. Links are near-white and bold; body copy is
+   grey. If you ever add an accent back, check it against the poster grid first.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg:      #0b0b0c;
+  --panel:   #121213;
+  --head:    #f4f4f2;   /* headings, links, emphasis */
+  --text:    #a9a7a4;
+  --faint:   #6e6c6a;
+  --rule:    #242426;
+
+  --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 58rem;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 7rem;
+}
+
+a { color: var(--head); text-decoration: none; }
+a:hover { color: #fff; }
+
+.ext {
+  display: inline-block;
+  margin-left: 0.3em;
+  font-size: 0.7em;
+  font-weight: 500;
+  color: var(--faint);
+  vertical-align: 0.08em;
+}
+a:hover .ext { color: var(--head); }
+
+
+/* ------------------------------- handle bar ------------------------------- */
+
+.handlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 5rem;
+}
+
+/* A background-image, not an <img>: nothing for the browser to offer "open
+   image in new tab" on. Deterrence only — the file is still fetchable. */
+.avatar {
+  width: 64px; height: 64px;
+  flex: none;
+  display: block;
+  border-radius: 50%;
+  background-image: url("avatar.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: var(--rule);
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+.handle {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--head);
+  letter-spacing: -0.02em;
+}
+
+
+/* --------------------------------- header --------------------------------- */
+
+h1 {
+  margin: 0;
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+  color: var(--head);
+}
+
+.lede {
+  margin: 1rem 0 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.iconlinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2.2rem;
+  margin-left: -0.6rem;   /* optical: pulls the first glyph back to the margin */
+}
+.iconlinks a {
+  display: grid;
+  place-items: center;
+  width: 2.7rem; height: 2.7rem;
+  border-radius: 11px;
+  color: var(--text);
+}
+.iconlinks a:hover { color: var(--head); background: var(--panel); }
+
+.iconlinks svg {
+  width: 23px; height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.iconlinks svg.solid { fill: currentColor; stroke: none; }
+
+
+/* ---------------------------------- tabs ---------------------------------- */
+
+/* Off-screen rather than display:none, so the radios stay keyboard focusable. */
+.tabstate {
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 2.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tabs label {
+  padding: 0.6rem 1rem;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--faint);
+  cursor: pointer;
+  user-select: none;
+}
+.tabs label:hover { color: var(--text); }
+
+.panel { display: none; }
+.panel > section:first-child { margin-top: 3rem; }
+
+/* The state lives on the radios before <main>, so these reach forward into it.
+   Move the inputs and every one of these breaks. */
+#tab-corporate:checked ~ main .panel.corporate,
+#tab-fun:checked       ~ main .panel.fun { display: block; }
+
+#tab-corporate:checked ~ main .tabs label[for="tab-corporate"],
+#tab-fun:checked       ~ main .tabs label[for="tab-fun"] {
+  color: var(--head);
+  border-bottom-color: var(--head);
+}
+
+.tabstate:focus-visible ~ main .tabs label[for="tab-corporate"],
+.tabstate:focus-visible ~ main .tabs label[for="tab-fun"] {
+  outline: 2px solid var(--head);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+
+/* -------------------------------- sections -------------------------------- */
+
+section { margin-bottom: 3.5rem; }
+section:last-child { margin-bottom: 0; }
+
+h2 {
+  margin: 0 0 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--head);
+}
+
+
+/* ---------------------------------- rows ---------------------------------- */
+
+.rows { margin: 0; padding: 0; list-style: none; }
+
+.rows li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
+}
+
+.mark {
+  width: 32px; height: 32px;
+  flex: none;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.what { min-width: 0; flex: 1; }
+
+.title {
+  display: inline;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Sits beside the employer name, quieter than it. */
+.yc {
+  margin-left: 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--faint);
+  white-space: nowrap;
+}
+/* Not a link, so it must not behave like one on hover. */
+.title.plain { color: var(--head); }
+
+.sub {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.when {
+  flex: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+
+/* -------------------------------- project cards -------------------------------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem 1.4rem 1.1rem;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+}
+.card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--head);
+}
+.card p {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* Pinned to the bottom so the link sits on one line across a row of cards
+   whose descriptions are different lengths. */
+.cardfoot {
+  display: flex;
+  margin-top: auto;
+  padding-top: 1.1rem;
+}
+.cardfoot a { color: var(--faint); line-height: 0; }
+.cardfoot a:hover { color: var(--head); }
+.ico { width: 22px; height: 22px; display: block; }
+.ico.solid { fill: currentColor; }
+
+/* Plain tags: a hairline box and grey text. No fills, no gradients, no glow. */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.9rem 0 0;
+}
+.skills span {
+  padding: 0.12rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+
+/* --------------------------------- tools --------------------------------- */
+
+.tools {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 0.65rem 1.4rem;
+  margin: 0;
+  font-size: 1rem;
+}
+.tools dt { color: var(--head); font-weight: 600; }
+.tools dd { margin: 0; color: var(--text); }
+
+
+/* ------------------------------- cover grids ------------------------------- */
+
+.grid {
+  padding-top: 2.6rem;   /* room for the favorite callout above row one */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 1.6rem 1.2rem;
+}
+
+.tile { position: relative; margin: 0; }
+
+/* The wrapper holds the aspect ratio so the grid stays even while the images
+   are still loading. */
+.art {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+}
+.art img {
+  width: 100%; height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* A hand-drawn note pointing at the favorite. Stacked: the sentence reads
+   first, then the arrow drops from it onto the poster below. It sits in the
+   space the grid reserves above its first row, and deliberately overflows its
+   tile sideways — the row above is empty, so nothing collides. */
+.fave {
+  position: absolute;
+  z-index: 2;
+  top: -3.6rem;
+  left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #e9c46a;
+  pointer-events: none;
+}
+.favetext {
+  font-family: "Caveat", "Bradley Hand", cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  transform: rotate(-3deg);
+}
+/* Offset so the head lands over the poster rather than off its edge. */
+.favearrow {
+  /* Explicit height, not auto: as a flex item an SVG with height:auto
+     collapses to zero and the arrow disappears. 40x42 viewBox. */
+  width: 1.5rem;
+  height: 1.575rem;
+  flex: none;
+  margin: 0.3rem 0 0 1.9rem;   /* clears the descenders in the line above */
+}
+
+
+figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--head);
+}
+.tile .meta {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--faint);
+}
+/* The callout already marks the favorite; the caption just gets a touch more
+   presence. */
+.tile.fav figcaption { color: #fff; }
+
+
+/* --------------------------------- teams --------------------------------- */
+
+.teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.2rem;
+}
+.team { margin: 0; text-align: center; width: 5.5rem; }
+.team img {
+  width: 72px; height: 72px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+.team figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+
+
+
+/* --------------------------------- narrow --------------------------------- */
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  main { padding: 2.5rem 1.25rem 4rem; }
+  .handlebar { margin-bottom: 3rem; }
+  h1 { font-size: 3rem; letter-spacing: -0.04em; }
+  .lede { font-size: 1.15rem; }
+  .avatar { width: 54px; height: 54px; }
+  .handle { font-size: 1.25rem; }
+
+  .cards { grid-template-columns: minmax(0, 1fr); }
+
+  /* The date drops under the text rather than being squeezed against it. */
+  .rows li {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-areas: "mark what" ".    when";
+    column-gap: 1rem;
+    align-items: start;
+  }
+  .mark { grid-area: mark; margin-top: 0.2rem; }
+  .what { grid-area: what; }
+  .when { grid-area: when; margin-top: 0.15rem; }
+
+  .tools { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+  .tools dd { margin-bottom: 0.9rem; }
+
+  .grid { grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: 1.2rem 0.9rem; }
+}
+
+@media print {
+  body { background: #fff; color: #222; }
+  h1, h2, .handle, .title, .title.plain, .card h3, figcaption { color: #000; }
+  .panel { display: block !important; }   /* print both tabs */
+  .ext { display: none; }
+}
