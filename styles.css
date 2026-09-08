@@ -90,6 +90,28 @@ a:hover .ext { color: var(--head); }
 
 /* --------------------------------- header --------------------------------- */
 
+/* Name block on the left, pixel portrait filling the space on the right. */
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+}
+.introtext { min-width: 0; }
+
+.pixel {
+  flex: none;
+  width: 200px;
+  height: 200px;
+  /* Keeps the sprite crisp instead of smoothing it into mush when scaled. */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
 h1 {
   margin: 0;
   /* Fluid: a fixed 5rem looked zoomed-in on an ordinary laptop window. */
@@ -478,8 +500,17 @@ figcaption {
   .duo { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }
 
+@media (max-width: 900px) {
+  .pixel { width: 148px; height: 148px; }
+}
+
 @media (max-width: 760px) {
   body { font-size: 16px; }
+  /* The headline will not shrink below its own width, so on a phone the
+     sprite wraps under the name block instead of being pushed off-screen. */
+  .intro { flex-wrap: wrap; gap: 1.5rem; }
+  .introtext { flex: 1 1 100%; }
+  .pixel { width: 120px; height: 120px; }
   .cards { grid-template-columns: minmax(0, 1fr); }
   main { padding: 2.5rem 1.25rem 4rem; }
   .handlebar { margin-bottom: 3rem; }
