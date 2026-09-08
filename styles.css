@@ -97,22 +97,59 @@ a:hover .ext { color: var(--head); }
 .intro { position: relative; }
 .introtext { min-width: 0; padding-right: 15rem; }
 
-.pixel {
+.ring {
   position: absolute;
-  /* Sits inside the gap between the name block and the right edge, not flush
-     against it. Absolute so it can never add to the header's height. */
-  right: 17%;
+  right: 15%;
   top: 42%;
   transform: translateY(-50%);
   width: 240px;
-  height: 240px;
-  /* Keeps the sprite crisp instead of smoothing it into mush when scaled. */
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  border-radius: 10px;
-  user-select: none;
-  -webkit-user-drag: none;
 }
+.ringimg { display: block; width: 100%; height: auto; }
+
+/* The "?" explains the diagram without labelling it on the ring itself. */
+.ringinfo { position: absolute; top: -2px; right: -26px; }
+.ringinfo > summary {
+  list-style: none;
+  cursor: pointer;
+  width: 19px; height: 19px;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  color: var(--faint);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+  user-select: none;
+}
+.ringinfo > summary::-webkit-details-marker { display: none; }
+.ringinfo > summary:hover,
+.ringinfo[open] > summary { color: var(--head); border-color: var(--faint); }
+
+.ringpanel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 30;
+  width: min(23rem, calc(100vw - 3rem));
+  padding: 1rem 1.1rem;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text);
+  text-align: left;
+}
+.ringpanel p { margin: 0 0 0.6rem; }
+.ringhead { color: var(--head); font-weight: 700; }
+.ringnote { margin: 0.7rem 0 0; color: var(--faint); }
+
+.ringkey { list-style: none; margin: 0.8rem 0 0; padding: 0; }
+.ringkey li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.16rem 0;
+              color: var(--head); font-weight: 600; font-size: 0.8rem; }
+.ringkey i { width: 9px; height: 9px; border-radius: 2px; background: var(--k); flex: none; }
+.ringkey span { color: var(--muted); font-weight: 400; font-size: 0.75rem; }
 
 
 h1 {
@@ -198,12 +235,10 @@ h1 {
 /* The state lives on the radios before <main>, so these reach forward into it.
    Move the inputs and every one of these breaks. */
 #tab-corporate:checked ~ main .panel.corporate,
-#tab-fun:checked       ~ main .panel.fun,
-#tab-research:checked  ~ main .panel.research { display: block; }
+#tab-fun:checked       ~ main .panel.fun { display: block; }
 
 #tab-corporate:checked ~ main .tabs label[for="tab-corporate"],
-#tab-fun:checked       ~ main .tabs label[for="tab-fun"],
-#tab-research:checked  ~ main .tabs label[for="tab-research"] {
+#tab-fun:checked       ~ main .tabs label[for="tab-fun"] {
   color: var(--head);
   border-bottom-color: var(--head);
 }
@@ -390,9 +425,6 @@ h2 {
 
 /* ------------------------------- cover grids ------------------------------- */
 
-.grid.papers { padding-top: 0; }
-.grid.papers .art { aspect-ratio: 300 / 388; background: #f6f4f0; }
-.grid.papers figcaption { font-size: 0.85rem; line-height: 1.3; }
 
 .grid {
   padding-top: 2.6rem;   /* room for the favorite callout above row one */
@@ -505,7 +537,7 @@ figcaption {
 
 @media (max-width: 900px) {
   .introtext { padding-right: 11rem; }
-  .pixel { right: 2%; width: 180px; height: 180px; }
+  .ring { right: 2%; width: 180px; }
 }
 
 @media (max-width: 760px) {
@@ -513,14 +545,8 @@ figcaption {
   /* No room beside the text on a phone: the sprite returns to flow and sits
      under the name block. */
   .introtext { padding-right: 0; }
-  .pixel {
-    position: static;
-    transform: none;
-    display: block;
-    height: 130px;
-    width: 130px;
-    margin: 1.5rem 0 0;
-  }
+  .ring { position: static; transform: none; width: 170px; margin: 1.5rem 0 0; }
+  .ringinfo { right: -24px; }
   .cards { grid-template-columns: minmax(0, 1fr); }
   main { padding: 2.5rem 1.25rem 4rem; }
   .handlebar { margin-bottom: 3rem; }

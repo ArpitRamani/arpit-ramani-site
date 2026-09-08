@@ -40,7 +40,6 @@
      operable. They must stay here, as siblings *before* <main>. -->
 <input class="tabstate" type="radio" name="tab" id="tab-corporate" checked>
 <input class="tabstate" type="radio" name="tab" id="tab-fun">
-<input class="tabstate" type="radio" name="tab" id="tab-research">
 
 <main>
 
@@ -78,14 +77,32 @@
     </nav>
 
       </div>
-      <img class="pixel" src="pixel.png" alt="Pixel-art illustration of Arpit at a computer"
-           width="256" height="256">
+      <div class="ring">
+        <img class="ringimg" src="lifering.svg" alt="Chord diagram of parts of my life" width="240" height="240">
+        <details class="ringinfo">
+          <summary aria-label="What is this diagram?">?</summary>
+          <div class="ringpanel">
+            <p class="ringhead">A chord diagram of my life.</p>
+            <p>Each arc is a part of it, each notch is one thing inside that part,
+              and every curve is a real link between two of them.</p>
+            <ul class="ringkey">
+              <li><i style="--k:#e0645a"></i>Places<span>Atlanta, Marietta, London, Boston</span></li>
+              <li><i style="--k:#e8a33d"></i>Work<span>Finaldose, Yang Lab, Roberts Lab, BU RISE</span></li>
+              <li><i style="--k:#5fd3b2"></i>Building<span>Eidola, Ferromilab, BGW-TWAS, Cas9 ML</span></li>
+              <li><i style="--k:#7aa8de"></i>Reading<span>Dostoevsky, Kafka, Orwell, Tolstoy, Camus</span></li>
+              <li><i style="--k:#c08adf"></i>Watching<span>Scarface, Godfather, Goodfellas, Casino</span></li>
+              <li><i style="--k:#8fd15a"></i>Football<span>Arsenal, Real Madrid, Bayern, Atlanta United</span></li>
+            </ul>
+            <p class="ringnote">So London joins Finaldose and Arsenal; Atlanta joins
+              both Emory labs and Atlanta United.</p>
+          </div>
+        </details>
+      </div>
     </div>
 
     <nav class="tabs" aria-label="Sections">
       <label for="tab-corporate">corporate</label>
       <label for="tab-fun">fun</label>
-      <label for="tab-research">research</label>
     </nav>
   </header>
 
@@ -444,103 +461,6 @@
       </section>
     </div>
 
-    <div class="panel research">
-      <section>
-        <h2>Machine Learning</h2>
-        <div class="grid papers">
-          <figure class="tile">
-            <a class="art" href="https://arxiv.org/abs/1706.03762"><img src="papers/attention.jpg" alt="Attention Is All You Need" loading="lazy" width="300" height="388"></a>
-            <figcaption>Attention Is All You Need<span class="meta">Vaswani et al. · 2017</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://arxiv.org/abs/1810.04805"><img src="papers/bert.jpg" alt="BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding" loading="lazy" width="300" height="388"></a>
-            <figcaption>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding<span class="meta">Devlin et al. · 2018</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/nature14539"><img src="papers/deep-learning.png" alt="Deep learning" loading="lazy" width="300" height="388"></a>
-            <figcaption>Deep learning<span class="meta">LeCun et al. · 2015</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/s41586-021-03819-2"><img src="papers/alphafold2.jpg" alt="Highly accurate protein structure prediction with AlphaFold" loading="lazy" width="300" height="388"></a>
-            <figcaption>Highly accurate protein structure prediction with AlphaFold<span class="meta">Jumper et al. · 2021</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1126/science.ade2574"><img src="papers/esmfold.png" alt="Evolutionary-scale prediction of atomic-level protein structure with a language model" loading="lazy" width="300" height="388"></a>
-            <figcaption>Evolutionary-scale prediction of atomic-level protein structure with a language model<span class="meta">Lin et al. · 2023</span></figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section>
-        <h2>Statistical Genetics</h2>
-        <div class="grid papers">
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1016/j.ajhg.2020.08.022"><img src="papers/bgw-twas.png" alt="Bayesian Genome-wide TWAS Method to Leverage both cis- and trans-eQTL Information through Summary Statistics" loading="lazy" width="300" height="388"></a>
-            <figcaption>Bayesian Genome-wide TWAS Method to Leverage both cis- and trans-eQTL Information through Summary Statistics<span class="meta">Luningham et al. · 2020</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/ng.3367"><img src="papers/predixcan.png" alt="A gene-based association method for mapping traits using reference transcriptome data" loading="lazy" width="300" height="388"></a>
-            <figcaption>A gene-based association method for mapping traits using reference transcriptome data<span class="meta">Gamazon et al. · 2015</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/ng.3506"><img src="papers/fusion-twas.jpg" alt="Integrative approaches for large-scale transcriptome-wide association studies" loading="lazy" width="300" height="388"></a>
-            <figcaption>Integrative approaches for large-scale transcriptome-wide association studies<span class="meta">Gusev et al. · 2016</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1016/j.ajhg.2019.05.018"><img src="papers/tigar.png" alt="TIGAR: An Improved Bayesian Tool for Transcriptomic Data Imputation Enhances Gene Mapping of Complex Traits" loading="lazy" width="300" height="388"></a>
-            <figcaption>TIGAR: An Improved Bayesian Tool for Transcriptomic Data Imputation Enhances Gene Mapping of Complex Traits<span class="meta">Nagpal et al. · 2019</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1126/science.aaz1776"><img src="papers/gtex-v8.png" alt="The GTEx Consortium atlas of genetic regulatory effects across human tissues" loading="lazy" width="300" height="388"></a>
-            <figcaption>The GTEx Consortium atlas of genetic regulatory effects across human tissues<span class="meta">GTEx Consortium · 2020</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.3233/JAD-179939"><img src="papers/rosmap.png" alt="Religious Orders Study and Rush Memory and Aging Project" loading="lazy" width="300" height="388"></a>
-            <figcaption>Religious Orders Study and Rush Memory and Aging Project<span class="meta">Bennett et al. · 2018</span></figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section>
-        <h2>Mass Spectrometry</h2>
-        <div class="grid papers">
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/nbt.1511"><img src="papers/maxquant.png" alt="MaxQuant enables high peptide identification rates, individualized p.p.b.-range mass accuracies and proteome-w" loading="lazy" width="300" height="388"></a>
-            <figcaption>MaxQuant enables high peptide identification rates, individualized p.p.b.-range mass accuracies and proteome-wide protein quantification<span class="meta">Cox et al. · 2008</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/nmeth.4256"><img src="papers/msfragger.png" alt="MSFragger: ultrafast and comprehensive peptide identification in mass spectrometry–based proteomics" loading="lazy" width="300" height="388"></a>
-            <figcaption>MSFragger: ultrafast and comprehensive peptide identification in mass spectrometry–based proteomics<span class="meta">Kong et al. · 2017</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1093/nar/gkv007"><img src="papers/limma.png" alt="limma powers differential expression analyses for RNA-sequencing and microarray studies" loading="lazy" width="300" height="388"></a>
-            <figcaption>limma powers differential expression analyses for RNA-sequencing and microarray studies<span class="meta">Ritchie et al. · 2015</span></figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section>
-        <h2>Neuroscience &amp; Behavior</h2>
-        <div class="grid papers">
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/s41593-018-0209-y"><img src="papers/deeplabcut.jpg" alt="DeepLabCut: markerless pose estimation of user-defined body parts with deep learning" loading="lazy" width="300" height="388"></a>
-            <figcaption>DeepLabCut: markerless pose estimation of user-defined body parts with deep learning<span class="meta">Mathis et al. · 2018</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/s41592-022-01426-1"><img src="papers/sleap.jpg" alt="SLEAP: A deep learning system for multi-animal pose tracking" loading="lazy" width="300" height="388"></a>
-            <figcaption>SLEAP: A deep learning system for multi-animal pose tracking<span class="meta">Pereira et al. · 2022</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/nature11129"><img src="papers/churchland.png" alt="Neural population dynamics during reaching" loading="lazy" width="300" height="388"></a>
-            <figcaption>Neural population dynamics during reaching<span class="meta">Churchland et al. · 2012</span></figcaption>
-          </figure>
-          <figure class="tile">
-            <a class="art" href="https://doi.org/10.1038/nn.3812"><img src="papers/big-behavioral-data.png" alt="Big behavioral data: psychology, ethology and the foundations of neuroscience" loading="lazy" width="300" height="388"></a>
-            <figcaption>Big behavioral data: psychology, ethology and the foundations of neuroscience<span class="meta">Gomez-Marin et al. · 2014</span></figcaption>
-          </figure>
-        </div>
-      </section>
-    </div>
 
   </div>
 
