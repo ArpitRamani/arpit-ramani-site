@@ -101,8 +101,11 @@ a:hover .ext { color: var(--head); }
 
 .pixel {
   flex: none;
-  width: 200px;
-  height: 200px;
+  /* Sized to fill the space beside the name block rather than sit in it as a
+     small corner ornament. */
+  width: 300px;
+  height: 300px;
+  margin-right: -0.5rem;
   /* Keeps the sprite crisp instead of smoothing it into mush when scaled. */
   image-rendering: pixelated;
   image-rendering: crisp-edges;
@@ -501,7 +504,7 @@ figcaption {
 }
 
 @media (max-width: 900px) {
-  .pixel { width: 148px; height: 148px; }
+  .pixel { width: 210px; height: 210px; margin-right: 0; }
 }
 
 @media (max-width: 760px) {
