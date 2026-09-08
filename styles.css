@@ -99,10 +99,10 @@ a:hover .ext { color: var(--head); }
 
 .ring {
   position: absolute;
-  right: 15%;
+  right: 12%;
   top: 42%;
   transform: translateY(-50%);
-  width: 240px;
+  width: 285px;
 }
 .ringimg { display: block; width: 100%; height: auto; }
 
@@ -154,6 +154,7 @@ a:hover .ext { color: var(--head); }
 
 h1 {
   margin: 0;
+  word-spacing: 0.14em;   /* the -0.05em tracking was eating the space */
   /* Fluid: a fixed 5rem looked zoomed-in on an ordinary laptop window. */
   font-size: clamp(2.6rem, 6.2vw, 4rem);
   font-weight: 800;
