@@ -38,7 +38,7 @@ body {
 main {
   max-width: 56rem;
   margin: 0 auto;
-  padding: 3rem 1.75rem 6rem;
+  padding: 4.5rem 1.75rem 6rem;
 }
 
 a { color: var(--head); text-decoration: none; }
@@ -94,8 +94,9 @@ a:hover .ext { color: var(--head); }
    The portrait is taken out of flow: in flow it was taller than the text and
    grew the header, pushing the tab bar down. The text alone sets the height
    and the sprite is centred in whatever space that leaves. */
+/* Nothing beside the name now, so the whole block is centred. */
 .intro { position: relative; }
-.introtext { min-width: 0; padding-right: 15rem; }
+.introtext { min-width: 0; text-align: center; }
 
 .ring {
   position: absolute;
@@ -177,7 +178,7 @@ h1 {
   align-items: center;
   gap: 0.4rem;
   margin-top: 1.9rem;
-  margin-left: -0.55rem;   /* optical: pulls the first glyph back to the margin */
+  justify-content: center;
 }
 .iconlinks a {
   display: grid;
@@ -211,6 +212,7 @@ h1 {
 
 .tabs {
   display: flex;
+  justify-content: center;
   gap: 0.4rem;
   margin-top: 2.4rem;
   border-bottom: 1px solid var(--rule);
@@ -537,17 +539,12 @@ figcaption {
 }
 
 @media (max-width: 900px) {
-  .introtext { padding-right: 11rem; }
-  .ring { right: 2%; width: 180px; }
 }
 
 @media (max-width: 760px) {
   body { font-size: 16px; }
   /* No room beside the text on a phone: the sprite returns to flow and sits
      under the name block. */
-  .introtext { padding-right: 0; }
-  .ring { position: static; transform: none; width: 170px; margin: 1.5rem 0 0; }
-  .ringinfo { right: -24px; }
   .cards { grid-template-columns: minmax(0, 1fr); }
   main { padding: 2.5rem 1.25rem 4rem; }
   .handlebar { margin-bottom: 3rem; }
