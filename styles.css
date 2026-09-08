@@ -171,16 +171,17 @@ h1 {
 /* The state lives on the radios before <main>, so these reach forward into it.
    Move the inputs and every one of these breaks. */
 #tab-corporate:checked ~ main .panel.corporate,
-#tab-fun:checked       ~ main .panel.fun { display: block; }
+#tab-fun:checked       ~ main .panel.fun,
+#tab-research:checked  ~ main .panel.research { display: block; }
 
 #tab-corporate:checked ~ main .tabs label[for="tab-corporate"],
-#tab-fun:checked       ~ main .tabs label[for="tab-fun"] {
+#tab-fun:checked       ~ main .tabs label[for="tab-fun"],
+#tab-research:checked  ~ main .tabs label[for="tab-research"] {
   color: var(--head);
   border-bottom-color: var(--head);
 }
 
-.tabstate:focus-visible ~ main .tabs label[for="tab-corporate"],
-.tabstate:focus-visible ~ main .tabs label[for="tab-fun"] {
+.tabstate:focus-visible ~ main .tabs label {
   outline: 2px solid var(--head);
   outline-offset: 2px;
   border-radius: 4px;
@@ -194,9 +195,6 @@ section:last-child { margin-bottom: 0; }
 
 h2 {
   margin: 0 0 1.4rem;
-  /* Lowercase throughout, matching the fun tab's "books" / "movies". Gives the
-     two tabs one voice. */
-  text-transform: lowercase;
   font-size: 1.32rem;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -299,6 +297,8 @@ h2 {
 }
 
 .cardhead a { color: var(--faint); line-height: 0; flex: none; }
+/* Matches the ↗ used on every other outbound link, at icon weight. */
+.extbig { font-size: 1rem; font-weight: 500; line-height: 1; }
 .cardhead a:hover { color: var(--head); }
 .ico { width: 22px; height: 22px; display: block; }
 .ico.solid { fill: currentColor; }
@@ -338,6 +338,10 @@ h2 {
 
 /* ------------------------------- cover grids ------------------------------- */
 
+.grid.papers { padding-top: 0; }
+.grid.papers .art { aspect-ratio: 300 / 388; background: #f6f4f0; }
+.grid.papers figcaption { font-size: 0.85rem; line-height: 1.3; }
+
 .grid {
   padding-top: 2.6rem;   /* room for the favorite callout above row one */
   display: grid;
@@ -349,6 +353,7 @@ h2 {
 
 /* The wrapper holds the aspect ratio so the grid stays even while the images
    are still loading. */
+a.art { display: block; }
 .art {
   position: relative;
   aspect-ratio: 2 / 3;
