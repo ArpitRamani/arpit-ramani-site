@@ -202,6 +202,22 @@ h2 {
 }
 
 
+/* Experience and Awards sit side by side: five rows each, so the two columns
+   bottom out together. Collapses to one column below 860px, where half-width
+   rows would wrap every subtitle. */
+.duo {
+  display: grid;
+  /* Not 1fr each: role titles on the left are longer than the award subtitles
+     on the right, and an even split wrapped every Emory row. */
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: 0 2.25rem;
+}
+.duo > section { margin-bottom: 3rem; }
+/* Half-width columns: the subtitle carries the role and the date, so it needs
+   to be a touch smaller here to stay on one line. */
+.duo .sub { font-size: 0.85rem; }
+.duo .title { font-size: 1.02rem; }
+
 /* ---------------------------------- rows ---------------------------------- */
 
 .rows { margin: 0; padding: 0; list-style: none; }
@@ -242,6 +258,7 @@ h2 {
 
 .sub {
   display: block;
+  text-wrap: pretty;
   font-size: 0.9rem;
   color: var(--text);
 }
@@ -258,7 +275,7 @@ h2 {
 }
 .when::before {
   content: "·";
-  margin: 0 0.45rem;
+  margin: 0 0.35rem;
   color: var(--faint);
 }
 
@@ -446,6 +463,10 @@ figcaption {
 
 
 /* --------------------------------- narrow --------------------------------- */
+
+@media (max-width: 900px) {
+  .duo { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}
 
 @media (max-width: 760px) {
   body { font-size: 16px; }
