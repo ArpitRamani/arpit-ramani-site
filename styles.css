@@ -99,13 +99,13 @@ a:hover .ext { color: var(--head); }
 
 .pixel {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;            /* vertically centred against the text block */
-  height: 100%;
-  width: auto;
-  max-height: 220px;
+  /* Sits inside the gap between the name block and the right edge, not flush
+     against it. Absolute so it can never add to the header's height. */
+  right: 11%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 240px;
+  height: 240px;
   /* Keeps the sprite crisp instead of smoothing it into mush when scaled. */
   image-rendering: pixelated;
   image-rendering: crisp-edges;
@@ -505,7 +505,7 @@ figcaption {
 
 @media (max-width: 900px) {
   .introtext { padding-right: 11rem; }
-  .pixel { max-height: 170px; }
+  .pixel { right: 2%; width: 180px; height: 180px; }
 }
 
 @media (max-width: 760px) {
@@ -515,9 +515,10 @@ figcaption {
   .introtext { padding-right: 0; }
   .pixel {
     position: static;
+    transform: none;
     display: block;
-    height: 120px;
-    width: 120px;
+    height: 130px;
+    width: 130px;
     margin: 1.5rem 0 0;
   }
   .cards { grid-template-columns: minmax(0, 1fr); }
