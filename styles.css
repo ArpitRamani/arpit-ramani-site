@@ -90,22 +90,22 @@ a:hover .ext { color: var(--head); }
 
 /* --------------------------------- header --------------------------------- */
 
-/* Name block on the left, pixel portrait filling the space on the right. */
-.intro {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2.5rem;
-}
-.introtext { min-width: 0; }
+/* Name block on the left, pixel portrait in the space on the right.
+   The portrait is taken out of flow: in flow it was taller than the text and
+   grew the header, pushing the tab bar down. The text alone sets the height
+   and the sprite is centred in whatever space that leaves. */
+.intro { position: relative; }
+.introtext { min-width: 0; padding-right: 15rem; }
 
 .pixel {
-  flex: none;
-  /* Sized to fill the space beside the name block rather than sit in it as a
-     small corner ornament. */
-  width: 300px;
-  height: 300px;
-  margin-right: -0.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;            /* vertically centred against the text block */
+  height: 100%;
+  width: auto;
+  max-height: 220px;
   /* Keeps the sprite crisp instead of smoothing it into mush when scaled. */
   image-rendering: pixelated;
   image-rendering: crisp-edges;
@@ -504,16 +504,22 @@ figcaption {
 }
 
 @media (max-width: 900px) {
-  .pixel { width: 210px; height: 210px; margin-right: 0; }
+  .introtext { padding-right: 11rem; }
+  .pixel { max-height: 170px; }
 }
 
 @media (max-width: 760px) {
   body { font-size: 16px; }
-  /* The headline will not shrink below its own width, so on a phone the
-     sprite wraps under the name block instead of being pushed off-screen. */
-  .intro { flex-wrap: wrap; gap: 1.5rem; }
-  .introtext { flex: 1 1 100%; }
-  .pixel { width: 120px; height: 120px; }
+  /* No room beside the text on a phone: the sprite returns to flow and sits
+     under the name block. */
+  .introtext { padding-right: 0; }
+  .pixel {
+    position: static;
+    display: block;
+    height: 120px;
+    width: 120px;
+    margin: 1.5rem 0 0;
+  }
   .cards { grid-template-columns: minmax(0, 1fr); }
   main { padding: 2.5rem 1.25rem 4rem; }
   .handlebar { margin-bottom: 3rem; }
