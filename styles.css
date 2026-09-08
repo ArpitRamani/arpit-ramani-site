@@ -194,6 +194,9 @@ section:last-child { margin-bottom: 0; }
 
 h2 {
   margin: 0 0 1.4rem;
+  /* Lowercase throughout, matching the fun tab's "books" / "movies". Gives the
+     two tabs one voice. */
+  text-transform: lowercase;
   font-size: 1.32rem;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -245,31 +248,41 @@ h2 {
   color: var(--text);
 }
 
+/* Trails the role on the same line rather than sitting in a right-hand column.
+   That column was the most recognizable thing about the layout this started
+   from, and dates are the least interesting thing on the page. */
 .when {
-  flex: none;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+.when::before {
+  content: "·";
+  margin: 0 0.45rem;
+  color: var(--faint);
+}
 
 
 /* -------------------------------- project cards -------------------------------- */
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
+.cards { display: block; }
 
-.card {
+/* One column, hairline separated. Boxed cards in a two-up grid are the shape
+   every portfolio template ships with; this reads as a list instead. */
+.card { padding: 0 0 1.25rem; }
+.card + .card {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+}
+.card:last-child { padding-bottom: 0; }
+
+.cardhead {
   display: flex;
-  flex-direction: column;
-  padding: 1.15rem 1.25rem 1rem;
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: 14px;
+  align-items: center;
+  gap: 0.6rem;
 }
 .card h3 {
   margin: 0;
@@ -285,15 +298,8 @@ h2 {
   color: var(--text);
 }
 
-/* Pinned to the bottom so the link sits on one line across a row of cards
-   whose descriptions are different lengths. */
-.cardfoot {
-  display: flex;
-  margin-top: auto;
-  padding-top: 1.1rem;
-}
-.cardfoot a { color: var(--faint); line-height: 0; }
-.cardfoot a:hover { color: var(--head); }
+.cardhead a { color: var(--faint); line-height: 0; flex: none; }
+.cardhead a:hover { color: var(--head); }
 .ico { width: 22px; height: 22px; display: block; }
 .ico.solid { fill: currentColor; }
 
@@ -445,7 +451,6 @@ figcaption {
   .avatar { width: 54px; height: 54px; }
   .handle { font-size: 1.25rem; }
 
-  .cards { grid-template-columns: minmax(0, 1fr); }
 
   /* The date drops under the text rather than being squeezed against it. */
   .rows li {
