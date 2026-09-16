@@ -102,8 +102,13 @@
               <div class="morebody">
                 <dl class="facts">
                 <dt>Role</dt><dd>Machine learning engineer intern, London.</dd>
-                <dt>Work</dt><dd>A random forest over 1,368 SpCas9 positions under blocked cross-validation, on features pairing mean-field direct-coupling analysis across a 5,254-sequence alignment with graph-topology descriptors of the coupling network.</dd>
-                <dt>Result</dt><dd>0.852 AUROC against 0.826 for the prior in-house baseline and 0.777 for ProDomino, the published state of the art. A Bayesian Additive Regression Trees layer adds calibrated 95% credible intervals and abstains on the 13% of sites outside measured support.</dd>
+                <dt>Problem</dt><dd>For each of 1,368 SpCas9 positions, predict whether an inserted folded domain leaves the enzyme working.</dd>
+                <dt>Features</dt><dd>A pipeline in Python and NumPy pairing mean-field direct-coupling analysis over a 5,254-sequence alignment with coevolutionary graph-topology descriptors on the coupling network.</dd>
+                <dt>Model</dt><dd>A scikit-learn random forest under domain-blocked cross-validation.</dd>
+                <dt>Result</dt><dd>0.852 AUROC against 0.826 for the prior in-house baseline, paired-bootstrap 95% CI [+0.002,&nbsp;+0.046], and 0.777 for ProDomino, the published sequence-model state of the art.</dd>
+                <dt>Calibration</dt><dd>A Bayesian Additive Regression Trees layer giving per-residue 95% credible intervals, with a covariate-shift check that abstains on the 13% of sites outside measured support.</dd>
+                <dt>Ceiling</dt><dd>Bounded the achievable ceiling near 0.88 and showed the wall is label noise rather than the model.</dd>
+                <dt>Beyond</dt><dd>Structure-based design work in the same programme, on private repositories.</dd>
                 </dl>
               </div>
             </details>
