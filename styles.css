@@ -113,11 +113,11 @@ a:hover .ext { color: var(--head); }
    nothing to a replaced element like <img> - it keeps its intrinsic 256px and
    makes the row taller instead. So the stretching is done by a plain div and
    the image fills it. aspect-ratio keeps the width square as the height moves. */
-/* Sized off the row rather than the name block now: 400px is what is left of
-   main's 56rem once the name and the gap are taken, so this is as large as it
-   goes without pushing the pair off centre. */
+/* 400px was what main's 56rem allows, but the crop runs the artwork to its own
+   edges, so at that size the DNA came within 38px of the tab rule and crowded
+   it. Backed off to 300. */
 .pixelwrap {
-  flex: 0 1 clamp(210px, 33vw, 400px);
+  flex: 0 1 clamp(180px, 26vw, 300px);
   aspect-ratio: 800 / 708;
 }
 /* The artwork is on a true black field. Screen maps black to the backdrop
