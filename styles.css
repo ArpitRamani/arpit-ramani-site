@@ -532,6 +532,141 @@ figcaption {
 
 
 
+/* ----------------------------- project panels ----------------------------- */
+
+/* Each card carries a <details> that opens into a labelled panel. No script:
+   the disclosure is native, so it works with JavaScript off and is keyboard
+   operable out of the box.
+
+   An open card takes the full grid width and turns two-column, preview on the
+   left at a fixed 19rem. Left in one column the panel was 370px wide, which is
+   too narrow for the pipeline video and made every line of the fact list wrap
+   twice. Going full width also stops the 2:1 preview from growing to 448px
+   tall, which is what happens if the card simply stretches. */
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+
+.more { margin-top: 1rem; }
+
+.more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--faint);
+}
+.more > summary::-webkit-details-marker { display: none; }
+.more > summary:hover,
+.more[open] > summary { color: var(--head); }
+.more > summary:focus-visible {
+  outline: 2px solid var(--head);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.chev {
+  width: 11px; height: 11px;
+  flex: none;
+  transition: transform 180ms ease;
+}
+.more[open] .chev { transform: rotate(180deg); }
+
+/* The panel cannot animate its own height in CSS, so it fades and settles
+   instead. Cheap, and it reads as a deliberate open rather than a jump. */
+.morebody {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  animation: reveal 200ms ease both;
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .morebody { animation: none; }
+  .chev { transition: none; }
+}
+
+/* Same label column as .tools, one step smaller. */
+.facts {
+  display: grid;
+  /* Capped, not 1fr: at the full panel width the lines ran ~110 characters. */
+  grid-template-columns: 5.4rem minmax(0, 38rem);
+  gap: 0.55rem 1.2rem;
+  margin: 0;
+}
+.facts dt {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--head);
+}
+.facts dd {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+  color: var(--text);
+}
+
+/* ------------------------------ embedded demo ------------------------------ */
+
+/* loading="lazy" on the iframe matters: inside a closed <details> the element
+   has no box, so nothing is fetched from YouTube until someone opens the card.
+   Without it every visitor pays for the embed on first paint. nocookie host
+   for the same reason. */
+.demo {
+  aspect-ratio: 16 / 9;
+  max-width: 34rem;
+  margin: 0 0 0.55rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+.demo iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+/* Scoped to .card to outrank `.card p`, which otherwise sets the size, the
+   color and a zero bottom margin on it. */
+.card .demonote {
+  margin: 0.55rem 0 1.25rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--faint);
+}
+
+/* :has() carries the open layout. Where it is missing the card simply stays in
+   its column and the panel opens narrow, which is worse but not broken. */
+@supports selector(:has(*)) {
+  .card:has(.more[open]) {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 19rem) minmax(0, 1fr);
+    column-gap: 1.9rem;
+  }
+  /* The preview only has to clear the three rows beside it (title, blurb,
+     tags). Spanning the panel too left a 400px column of nothing under it on
+     every card without a video. */
+  .card:has(.more[open]) > .shot {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: start;   /* a stretched grid item ignores the 2/1 aspect-ratio */
+    margin-bottom: 0;
+  }
+  .card:has(.more[open]) > .cardhead,
+  .card:has(.more[open]) > p { grid-column: 2; }
+  .card:has(.more[open]) > .more { grid-column: 1 / -1; }
+}
+
+
 /* --------------------------------- narrow --------------------------------- */
 
 @media (max-width: 900px) {
@@ -570,6 +705,16 @@ figcaption {
   .tools dd { margin-bottom: 0.9rem; }
 
   .grid { grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: 1.2rem 0.9rem; }
+
+  /* No room for a side-by-side preview: the open card goes back to a stack. */
+  .card:has(.more[open]) { grid-template-columns: minmax(0, 1fr); }
+  .card:has(.more[open]) > .shot { grid-column: 1; grid-row: auto; margin-bottom: 0.85rem; }
+  .card:has(.more[open]) > .cardhead,
+  .card:has(.more[open]) > p,
+  .card:has(.more[open]) > .more { grid-column: 1; }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .facts { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+  .facts dd { margin-bottom: 0.8rem; }
 }
 
 @media print {
@@ -577,4 +722,5 @@ figcaption {
   h1, h2, .handle, .title, .title.plain, .card h3, figcaption { color: #000; }
   .panel { display: block !important; }   /* print both tabs */
   .ext { display: none; }
+  .more, .demo { display: none; }
 }

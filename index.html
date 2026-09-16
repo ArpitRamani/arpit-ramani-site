@@ -173,6 +173,17 @@
             <div class="cardhead"><h3>Eidola</h3><a href="https://www.eidola.me" aria-label="Eidola website" title="eidola.me"><span class="extbig" aria-hidden="true">↗</span></a></div>
             <p>Multi-tenant memory app with 106 active users.</p>
             <p class="skills"><span>Next.js</span><span>FastAPI</span><span>pgvector</span><span>Cloud Run</span><span>Swift</span></p>
+                      <details class="more">
+              <summary>details<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+              <div class="morebody">
+                <dl class="facts">
+              <dt>Role</dt><dd>Founder and sole engineer: frontend, backend, iOS, and infrastructure.</dd>
+              <dt>Built</dt><dd>A Next.js BFF and a FastAPI service on Cloud Run, Supabase Postgres under row-level security, Inngest for async extraction and topic reconciliation, Stripe billing.</dd>
+              <dt>Retrieval</dt><dd>An HNSW index over 3,072-dimension half-precision embeddings in pgvector, per-user HDBSCAN topic clustering, and answers streamed token by token over server-sent events.</dd>
+              <dt>Scale</dt><dd>106 active users, 149 REST endpoints, 103 test suites, and a 20.5k-line Swift iOS and watchOS client.</dd>
+                </dl>
+              </div>
+            </details>
           </article>
 
           <article class="card">
@@ -180,6 +191,24 @@
             <div class="cardhead"><h3>BGW-TWAS Fine-Mapping</h3><a href="https://github.com/ArpitRamani/BGW-TWAS-PWAS-on-AD-dementia" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a></div>
             <p>Gene-level fine-mapping across 789k GWAS samples on Slurm arrays.</p>
             <p class="skills"><span>R</span><span>Slurm</span><span>GWAS</span><span>TWAS</span><span>PWAS</span></p>
+                      <details class="more">
+              <summary>demo &amp; details<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+              <div class="morebody">
+            <div class="demo">
+              <iframe src="https://www.youtube-nocookie.com/embed/tjXXktRvQ8k?rel=0"
+                      title="Walkthrough of the BGW-TWAS and GIFT pipeline"
+                      loading="lazy" allowfullscreen
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+            <p class="demonote">Code walkthrough of the pipeline, start to finish.</p>
+                <dl class="facts">
+              <dt>Role</dt><dd>Computational genomics research intern, Dr.&nbsp;Jingjing Yang Lab, Emory.</dd>
+              <dt>Problem</dt><dd>PrediXcan, FUSION and TIGAR read cis-eQTLs only, and trans effects carry roughly a third of trait-associated GWAS signal.</dd>
+              <dt>Method</dt><dd>Bayesian variable selection with spike-and-slab priors over 1,647 multi-omic ROSMAP samples, then GIFT fine-mapping across distributed Slurm job arrays against Bellenguez GWAS summary statistics (111,326 cases, 677,663 controls).</dd>
+              <dt>Result</dt><dd>26 Alzheimer's risk genes that three published cis-only methods missed, over 1,000 HPC compute hours. First author on an abstract accepted to ASHG 2026.</dd>
+                </dl>
+              </div>
+            </details>
           </article>
 
           <article class="card">
@@ -187,6 +216,18 @@
             <div class="cardhead"><h3>Cas9 Insertion Tolerance</h3><a href="https://github.com/ArpitRamani/cas9-domain-insertion-tolerance" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a></div>
             <p>Calibrated protein engineering that abstains outside measured support.</p>
             <p class="skills"><span>Python</span><span>scikit-learn</span><span>BART</span><span>DCA</span></p>
+                      <details class="more">
+              <summary>details<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+              <div class="morebody">
+                <dl class="facts">
+              <dt>Role</dt><dd>Machine learning engineer intern, Finaldose (Y&nbsp;Combinator P26).</dd>
+              <dt>Problem</dt><dd>For each of 1,368 SpCas9 positions, predict whether an inserted folded domain leaves the enzyme working.</dd>
+              <dt>Method</dt><dd>Mean-field direct-coupling analysis over a 5,254-sequence alignment paired with graph-topology descriptors of the coupling network, trained as a random forest under leave-one-block-out cross-validation. A Bayesian Additive Regression Trees layer adds calibrated per-residue 95% credible intervals and abstains on the 13% of sites outside measured support.</dd>
+              <dt>Result</dt><dd>0.852 AUROC against 0.826 for the prior in-house baseline (paired-bootstrap 95% CI [+0.002,&nbsp;+0.046]) and 0.777 for ProDomino, the published sequence-model state of the art. The ceiling sits near 0.88, and the wall is label noise rather than the model.</dd>
+              <dt>Code</dt><dd>The public repository holds the BART calibration phase; the coevolution model is not yet pushed.</dd>
+                </dl>
+              </div>
+            </details>
           </article>
 
           <article class="card">
@@ -194,6 +235,17 @@
             <div class="cardhead"><h3>ALS Spinal Cord Proteomics</h3><a href="https://github.com/ArpitRamani/Ramani-McEachinSpinalCord-RAnalysis" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a></div>
             <p>Differential expression over a sparse 34-patient cohort in R.</p>
             <p class="skills"><span>R</span><span>limma</span><span>TAMPOR</span><span>FragPipe</span></p>
+                      <details class="more">
+              <summary>details<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+              <div class="morebody">
+                <dl class="facts">
+              <dt>Role</dt><dd>Computational proteomics research intern, Dr.&nbsp;Blaine Roberts Lab, Emory.</dd>
+              <dt>Problem</dt><dd>Nitro-tyrosine and nitro-tryptophan differential expression across the McEachin C9orf72 ALS spinal cord TMTpro set, 34 patients over two plexes.</dd>
+              <dt>Method</dt><dd>TAMPOR batch and loading normalization, a 50% missingness filter, random-forest imputation, then limma moderated t-tests under BH-FDR across three contrasts: C9 ALS against control, antisense-treated against control, and treated against untreated.</dd>
+              <dt>Result</dt><dd>TAMPOR keeps the ~124 sites detected in both plexes; a log2 median-centred fallback carries ~419 sparser sites with batch as a covariate. Both modes ship, because a sparse modification is often sampled in one plex only.</dd>
+                </dl>
+              </div>
+            </details>
           </article>
 
           <article class="card">
@@ -201,6 +253,17 @@
             <div class="cardhead"><h3>Nitration MD</h3><a href="https://github.com/ArpitRamani/nitration-md" aria-label="Repository" title="GitHub"><svg class="ico solid"><use href="#i-gh"/></svg></a></div>
             <p>Distributed molecular dynamics on AWS ParallelCluster GPU arrays.</p>
             <p class="skills"><span>OpenMM</span><span>CUDA</span><span>AMBER</span><span>Slurm</span></p>
+                      <details class="more">
+              <summary>details<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+              <div class="morebody">
+                <dl class="facts">
+              <dt>Role</dt><dd>Computational proteomics research intern, Dr.&nbsp;Blaine Roberts Lab, Emory.</dd>
+              <dt>Question</dt><dd>Whether nitration is site-selective rather than random oxidative damage. Proton-coupled electron transfer predicts that nitrated aromatics sit beside a carboxylate proton acceptor and a thiol redox partner.</dd>
+              <dt>Method</dt><dd>AMBER ff19SB/OPC systems built through AmberTools and run on OpenMM and CUDA at a 4 fs timestep under hydrogen-mass repartitioning, with replicas fanned across Slurm GPU arrays on AWS ParallelCluster.</dd>
+              <dt>Result</dt><dd>Per-aromatic donor-to-carboxylate distance, hydrogen-bond occupancy, ring-to-thiol distance and solvent exposure, compared between nitrated and non-nitrated residues inside the same trajectory.</dd>
+                </dl>
+              </div>
+            </details>
           </article>
 
           <article class="card">
@@ -208,6 +271,17 @@
             <div class="cardhead"><h3>Ferromilab</h3><a href="https://isef.net/project/cbio006-biclonal-antibodies-to-prevent-ferroptosis-in-ad" aria-label="Project page" title="ISEF"><span class="extbig" aria-hidden="true">↗</span></a></div>
             <p>Bispecific antibody design against the hepcidin&ndash;ferroportin interface.</p>
             <p class="skills"><span>AlphaFold</span><span>Rosetta</span><span>HADDOCK</span><span>QM/MM</span></p>
+                      <details class="more">
+              <summary>details<svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+              <div class="morebody">
+                <dl class="facts">
+              <dt>Role</dt><dd>Sole author, 2024 to 2025.</dd>
+              <dt>Problem</dt><dd>Design a bispecific antibody against the hepcidin-ferroportin interface to block iron-driven ferroptosis in Alzheimer's.</dd>
+              <dt>Method</dt><dd>AlphaFold and MODELLER structure prediction and refinement, HADDOCK epitope mapping, 1,352 grafted Rosetta CDRs, and CHARMM QM/MM partitioned onto polar-contact residues to keep the quantum region tractable.</dd>
+              <dt>Result</dt><dd>3rd Place Grand Award in Computational Biology at Regeneron ISEF. Run on A100 GPUs across Google Cloud, Colab and EC2.</dd>
+                </dl>
+              </div>
+            </details>
           </article>
 
         </div>
