@@ -23,14 +23,21 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+/* One lever for the whole page. Everything below is in rem, so raising the
+   root scales type, spacing, max-widths and radii together and the measure
+   (characters per line) is unchanged. The header art stays pinned in px on
+   purpose: it is the fixed thing the rest is now scaled against. */
+html {
+  -webkit-text-size-adjust: 100%;
+  font-size: 17.6px;          /* 110% of the 16px default */
+}
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -223,7 +230,7 @@ h1 {
 .iconlinks a:hover { color: var(--head); background: var(--panel); }
 
 .iconlinks svg {
-  width: 21px; height: 21px;
+  width: 1.3125rem; height: 1.3125rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.7;
@@ -328,7 +335,7 @@ h2 {
 }
 
 .mark {
-  width: 28px; height: 28px;
+  width: 1.75rem; height: 1.75rem;
   flex: none;
   object-fit: contain;
   border-radius: 6px;
@@ -550,7 +557,7 @@ figcaption {
 }
 .team { margin: 0; text-align: center; width: 5.5rem; }
 .team img {
-  width: 72px; height: 72px;
+  width: 4.5rem; height: 4.5rem;
   object-fit: contain;
   display: block;
   margin: 0 auto;
@@ -608,7 +615,7 @@ figcaption {
 }
 
 .chev {
-  width: 11px; height: 11px;
+  width: 0.6875rem; height: 0.6875rem;
   flex: none;
   transition: transform 180ms ease;
 }
@@ -729,7 +736,7 @@ figcaption {
 }
 
 @media (max-width: 760px) {
-  body { font-size: 16px; }
+  html { font-size: 16px; }
   /* No room beside the text on a phone: the sprite returns to flow and sits
      under the name block. */
   .cards { grid-template-columns: minmax(0, 1fr); }
@@ -851,8 +858,8 @@ figcaption {
   flex: none;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   border: 1px solid var(--rule);
   border-radius: 8px;
   background: none;
