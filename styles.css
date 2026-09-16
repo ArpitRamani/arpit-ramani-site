@@ -551,6 +551,8 @@ figcaption {
 
 .more { margin-top: 1rem; }
 
+/* --text, not --faint: at 0.85rem this is an affordance, not a caption, and
+   --faint sits at 3.8:1 on --bg, under the 4.5:1 AA floor. --text is 8.2:1. */
 .more > summary {
   display: inline-flex;
   align-items: center;
@@ -558,10 +560,10 @@ figcaption {
   list-style: none;
   cursor: pointer;
   user-select: none;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: -0.005em;
-  color: var(--faint);
+  color: var(--text);
 }
 .more > summary::-webkit-details-marker { display: none; }
 .more > summary:hover,
