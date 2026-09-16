@@ -848,3 +848,19 @@ body.dlgopen { overflow: hidden; }
   .dlghead { padding: 1rem 1rem 0.8rem; }
   .dlgbody { padding: 1.1rem 1rem 1.3rem; }
 }
+
+
+/* --------------------------- particle name -------------------------------- */
+
+/* The <h1> keeps its text for selection, search and screen readers; it only
+   goes transparent once particles.js has particles on screen. */
+h1.hasparticles { color: transparent; }
+h1.hasparticles::selection { color: var(--head); }
+.namecanvas {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

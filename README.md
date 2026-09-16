@@ -1,7 +1,7 @@
 # arpit ramani — personal site
 
-Static site. No framework, no build step. One progressive-enhancement
-script, `site.js`.
+Static site. No framework, no build step. Two progressive-enhancement
+scripts, `site.js` and `particles.js`.
 
 ```
 index.html   all content
@@ -29,6 +29,12 @@ Or open `index.html` directly.
   it fails the modal still opens, just on the Web Animations API. Closing never
   waits on an animation promise alone, because a throttled tab can leave one
   pending and strand the dialog open.
+- **`particles.js` reads its type off the `<h1>`.** Font, weight, size and
+  letter-spacing all come from the real heading, so the canvas cannot move the
+  header. The heading keeps its text for selection, search and screen readers
+  and only goes `color: transparent` once particles are actually on screen.
+  Watch out: `getComputedStyle` is live, so the ink has to be read *before*
+  that class lands or the particles paint in `transparent`.
 - **Tabs use no JavaScript.** `corporate` / `fun` are two radio inputs at the top
   of `<body>`, switched by `:checked` in CSS. They must stay as siblings *before*
   `<main>` or every panel selector breaks.
