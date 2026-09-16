@@ -116,22 +116,3 @@ function lift(details) {
 }
 
 document.querySelectorAll('.card > details.more').forEach(lift);
-
-
-/* ------------------------------------------------------- portrait sizing --- */
-
-/* Keep the portrait square and exactly as tall as the name block. See the
-   .pixelwrap note in styles.css for why this cannot be pure CSS. */
-const wrap = document.querySelector('.pixelwrap');
-const introtext = document.querySelector('.introtext');
-if (wrap && introtext) {
-  const stacked = matchMedia('(max-width: 760px)');
-  const sync = () => {
-    if (stacked.matches) { wrap.style.width = wrap.style.height = ''; return; }
-    const h = introtext.getBoundingClientRect().height;
-    if (h > 10) { wrap.style.width = h + 'px'; wrap.style.height = h + 'px'; }
-  };
-  new ResizeObserver(sync).observe(introtext);
-  stacked.addEventListener('change', sync);
-  sync();
-}
