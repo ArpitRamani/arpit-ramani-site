@@ -95,7 +95,26 @@ a:hover .ext { color: var(--head); }
    grew the header, pushing the tab bar down. The text alone sets the height
    and the sprite is centred in whatever space that leaves. */
 /* Nothing beside the name now, so the whole block is centred. */
-.intro { position: relative; }
+/* The portrait sits beside the name block and the pair centres as a unit, so
+   the header keeps reading as centred rather than left-aligned. */
+.intro {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+}
+
+/* The art is natively 256x256, so 128 CSS px is 1:1 on a 2x display. Left to
+   default (smooth) rendering on purpose: `pixelated` would nearest-neighbour
+   away every other row on a 1x screen and shred the glasses. */
+.pixelme {
+  flex: none;
+  width: 128px;
+  height: 128px;
+  border-radius: 14px;
+  border: 1px solid var(--rule);
+}
 .introtext { min-width: 0; text-align: center; }
 
 .ring {
@@ -705,6 +724,9 @@ figcaption {
   h1 { font-size: 3rem; letter-spacing: -0.04em; }
   .lede { font-size: 1.15rem; }
   .avatar { width: 54px; height: 54px; }
+  /* Side by side leaves the name about 190px on a phone. Stack instead. */
+  .intro { flex-direction: column; gap: 1.1rem; }
+  .pixelme { width: 104px; height: 104px; }
   .handle { font-size: 1.25rem; }
 
 
