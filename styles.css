@@ -100,7 +100,7 @@ a:hover .ext { color: var(--head); }
 .intro {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 1.75rem;
 }
@@ -108,12 +108,35 @@ a:hover .ext { color: var(--head); }
 /* The art is natively 256x256, so 128 CSS px is 1:1 on a 2x display. Left to
    default (smooth) rendering on purpose: `pixelated` would nearest-neighbour
    away every other row on a 1x screen and shred the glasses. */
-.pixelme {
+/* The portrait spans the whole name block, heading cap to the bottom of the
+   icon row. That height has to come from align-self: stretch, and stretch does
+   nothing to a replaced element like <img> - it keeps its intrinsic 256px and
+   makes the row taller instead. So the stretching is done by a plain div and
+   the image fills it. aspect-ratio keeps the width square as the height moves. */
+/* Square, and as tall as the name block: heading cap down to the bottom of the
+   icon row. CSS alone cannot say that. align-self: stretch does give the right
+   height, but a flex item's cross size only becomes definite after the line is
+   sized, which is too late for aspect-ratio to transfer it to the width, so the
+   box lays out zero-wide. site.js syncs the two; the width below is the no-JS
+   fallback and is roughly what the block measures at the default type size. */
+.pixelwrap {
   flex: none;
-  width: 128px;
-  height: 128px;
+  align-self: stretch;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  width: 11rem;
+}
+/* Absolute so the image contributes no intrinsic height. In flow it sizes the
+   wrapper to its own 256px, the wrapper becomes the tallest item, and stretch
+   then resolves to 256 - the row grows to the picture instead of the picture
+   shrinking to the row. */
+.pixelme {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 14px;
-  border: 1px solid var(--rule);
 }
 .introtext { min-width: 0; text-align: center; }
 
@@ -725,8 +748,11 @@ figcaption {
   .lede { font-size: 1.15rem; }
   .avatar { width: 54px; height: 54px; }
   /* Side by side leaves the name about 190px on a phone. Stack instead. */
-  .intro { flex-direction: column; gap: 1.1rem; }
-  .pixelme { width: 104px; height: 104px; }
+  /* Stacked, stretch would run the portrait the full width of the column. */
+  .intro { flex-direction: column; align-items: center; gap: 1.1rem; }
+  /* It follows the text in source order so it lands to the right on a wide
+     screen; stacked it belongs above the name, not under the icon row. */
+  .pixelwrap { align-self: auto; order: -1; width: 104px; }
   .handle { font-size: 1.25rem; }
 
 
