@@ -743,3 +743,108 @@ figcaption {
   .ext { display: none; }
   .more, .demo { display: none; }
 }
+
+
+/* ------------------------------ project dialogs --------------------------- */
+
+/* The trigger is a <details><summary> with scripting off and a <button> once
+   site.js has run. Both wear the same face. */
+.morebtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--text);
+}
+.morebtn:hover { color: var(--head); }
+.morebtn:focus-visible {
+  outline: 2px solid var(--head);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.morebtn .chev { transition: transform 200ms ease; }
+.morebtn:hover .chev { transform: translateY(1px); }
+
+.projdlg {
+  width: min(52rem, calc(100vw - 2.5rem));
+  max-height: min(84vh, 46rem);
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  overflow: hidden;
+  box-shadow: 0 34px 90px -24px rgb(0 0 0 / 0.8);
+}
+.projdlg::backdrop {
+  background: rgb(6 6 7 / 0.62);
+  backdrop-filter: blur(14px) saturate(0.85);
+  animation: dlgfade 260ms ease both;
+}
+@keyframes dlgfade { from { opacity: 0; } to { opacity: 1; } }
+
+.dlgpanel { display: flex; flex-direction: column; max-height: inherit; }
+
+.dlghead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 1.35rem 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+.dlghead h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--head);
+}
+.dlgx {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: none;
+  color: var(--faint);
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.dlgx:hover { color: var(--head); border-color: var(--head); background: rgb(255 255 255 / 0.05); }
+.dlgx:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
+
+.dlgbody {
+  padding: 1.35rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* The panel already carries the rule and spacing the card version needed. */
+.dlgbody .morebody {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  animation: none;
+}
+/* The 34rem cap exists to stop the preview ballooning inside a card. The
+   dialog is wider than that and the video is the point, so let it fill. */
+.dlgbody .demo { max-width: none; margin-bottom: 1.1rem; }
+
+/* showModal() does not stop the page behind from scrolling. */
+body.dlgopen { overflow: hidden; }
+
+@media (max-width: 760px) {
+  .projdlg { width: calc(100vw - 1.5rem); max-height: 88vh; }
+  .dlghead { padding: 1rem 1rem 0.8rem; }
+  .dlgbody { padding: 1.1rem 1rem 1.3rem; }
+}

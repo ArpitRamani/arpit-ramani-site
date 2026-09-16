@@ -1,6 +1,7 @@
 # arpit ramani — personal site
 
-Static site. No framework, no build step, no JavaScript.
+Static site. No framework, no build step. One progressive-enhancement
+script, `site.js`.
 
 ```
 index.html   all content
@@ -21,6 +22,13 @@ Or open `index.html` directly.
 
 ## Notes for future edits
 
+- **`site.js` is an enhancement, never a requirement.** The project panels ship
+  as `<details>` and work as accordions with scripting off. On load the script
+  lifts each one into a `<dialog>`, which is what gives Escape-to-close, a focus
+  trap and an inert background. Motion One comes from a CDN inside a `try`; if
+  it fails the modal still opens, just on the Web Animations API. Closing never
+  waits on an animation promise alone, because a throttled tab can leave one
+  pending and strand the dialog open.
 - **Tabs use no JavaScript.** `corporate` / `fun` are two radio inputs at the top
   of `<body>`, switched by `:checked` in CSS. They must stay as siblings *before*
   `<main>` or every panel selector breaks.
