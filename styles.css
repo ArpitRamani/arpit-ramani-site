@@ -639,6 +639,23 @@ figcaption {
 
 /* Scoped to .card to outrank `.card p`, which otherwise sets the size, the
    color and a zero bottom margin on it. */
+/* Row panels (experience, awards) reuse .more but sit in a half-width column,
+   so the fact list stacks label over value instead of running them side by
+   side. "Ferromilab" also overruns the 5.4rem label column the cards use. */
+.rowmore { margin-top: 0.45rem; }
+.rowmore .morebody { margin-top: 0.6rem; padding-top: 0.6rem; }
+.rowmore .facts {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.15rem;
+}
+.rowmore .facts dt { margin-top: 0.5rem; }
+.rowmore .facts dt:first-child { margin-top: 0; }
+.rowmore .facts dd { font-size: 0.86rem; }
+
+/* .rows li centres its logo against the row. Once a panel opens that would
+   drop the logo to the middle of the expanded block, so switch to top. */
+.rows li:has(.more[open]) { align-items: flex-start; }
+
 .card .demonote {
   margin: 0.55rem 0 1.25rem;
   font-size: 0.8rem;
