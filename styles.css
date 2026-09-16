@@ -325,14 +325,29 @@ h2 {
 
 /* ---------------------------------- rows ---------------------------------- */
 
-.rows { margin: 0; padding: 0; list-style: none; }
+/* Each entry is its own panel. Open padding alone left the toggle line drifting
+   between rows with nothing to say which entry it belonged to, and the gaps
+   read as larger than they were because nothing bounded them. */
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
 
 .rows li {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.7rem 0;
+  gap: 0.9rem;
+  padding: 0.8rem 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 11px;
+  transition: border-color 160ms ease;
 }
+.rows li:hover { border-color: #313135; }
 
 .mark {
   width: 1.75rem; height: 1.75rem;
@@ -682,8 +697,8 @@ figcaption {
 /* Row panels (experience, awards) reuse .more but sit in a half-width column,
    so the fact list stacks label over value instead of running them side by
    side. "Ferromilab" also overruns the 5.4rem label column the cards use. */
-.rowmore { margin-top: 0.45rem; }
-.rowmore .morebody { margin-top: 0.6rem; padding-top: 0.6rem; }
+.rowmore { margin-top: 0.3rem; }
+.rowmore .morebody { margin-top: 0.5rem; padding-top: 0.5rem; }
 .rowmore .facts {
   grid-template-columns: minmax(0, 1fr);
   gap: 0.15rem;
