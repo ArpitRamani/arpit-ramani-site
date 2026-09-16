@@ -325,29 +325,22 @@ h2 {
 
 /* ---------------------------------- rows ---------------------------------- */
 
-/* Each entry is its own panel. Open padding alone left the toggle line drifting
-   between rows with nothing to say which entry it belonged to, and the gaps
-   read as larger than they were because nothing bounded them. */
+/* Spacing is a gap on the list rather than padding on each row: same open look,
+   but one number to tune instead of a doubled-up 0.7rem top and bottom. */
 .rows {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.95rem;
 }
 
 .rows li {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.8rem 0.9rem;
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: 11px;
-  transition: border-color 160ms ease;
+  gap: 1rem;
 }
-.rows li:hover { border-color: #313135; }
 
 .mark {
   width: 1.75rem; height: 1.75rem;
