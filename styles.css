@@ -120,11 +120,11 @@ a:hover .ext { color: var(--head); }
    nothing to a replaced element like <img> - it keeps its intrinsic 256px and
    makes the row taller instead. So the stretching is done by a plain div and
    the image fills it. aspect-ratio keeps the width square as the height moves. */
-/* 215 puts the art at ~190 tall against a ~195 name block, so the two match
-   instead of the picture overhanging the text. Every larger size tried (400,
-   then 300) read as the art competing with the name. */
+/* Landed at 255 after 400 and 300 read as the art competing with the name and
+   215 disappeared into it. Here it is ~226 tall against a ~195 name block:
+   a shade larger than the heading, which is what reads as deliberate. */
 .pixelwrap {
-  flex: 0 1 clamp(155px, 20vw, 215px);
+  flex: 0 1 clamp(170px, 23vw, 255px);
   aspect-ratio: 800 / 708;
 }
 /* The artwork is on a true black field. Screen maps black to the backdrop
