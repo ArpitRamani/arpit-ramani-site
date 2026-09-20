@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+# An unlinked text-only draft of the portfolio page, kept only so it is easy to
+# go back to it. It is not part of the site.
+Disallow: /portfolio-text.html
 
 Sitemap: https://www.arpitramani.com/sitemap.xml

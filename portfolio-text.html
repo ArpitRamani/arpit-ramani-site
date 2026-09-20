@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>arpit ramani — portfolio</title>
+<meta name="description" content="Arpit Ramani — experience, awards and projects in machine learning, computational genomics and proteomics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="min.css">
+
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://www.arpitramani.com/portfolio.html">
+<meta property="og:title" content="arpit ramani — portfolio">
+<meta property="og:description" content="experience, awards and projects.">
+<meta property="og:image" content="https://www.arpitramani.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="arpit ramani — portfolio">
+<meta name="twitter:description" content="experience, awards and projects.">
+<meta name="twitter:image" content="https://www.arpitramani.com/og.jpg">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body class="work">
+
+<div class="wrap">
+
+  <a class="back" href="./">&larr; back</a>
+
+  <h1 class="pagehead">arpit ramani</h1>
+  <p class="pagesub">foundational ml + -omics. everything below opens for the detail.</p>
+
+  <section>
+    <h2>experience</h2>
+    <ul class="rows">
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://www.gatech.edu">georgia tech</a>
+          <span class="when">2026 &ndash; now</span>
+        </span>
+        <span class="role">foundational ml model engineering</span>
+      </li>
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://finaldose.ai">finaldose</a>
+          <span class="role tag">&mdash; yc p26</span>
+          <span class="when">2026 &ndash; now</span>
+        </span>
+        <span class="role">machine learning engineer intern, london</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>problem</dt><dd>for each of 1,368 spcas9 positions, predict whether an inserted folded domain leaves the enzyme working.</dd>
+            <dt>features</dt><dd>a python and numpy pipeline pairing mean-field direct-coupling analysis over a 5,254-sequence alignment with coevolutionary graph-topology descriptors on the coupling network.</dd>
+            <dt>model</dt><dd>a scikit-learn random forest under domain-blocked cross-validation.</dd>
+            <dt>result</dt><dd>0.852 auroc against 0.826 for the prior in-house baseline, paired-bootstrap 95% ci [+0.002,&nbsp;+0.046], and 0.777 for prodomino, the published sequence-model state of the art.</dd>
+            <dt>calibration</dt><dd>a bayesian additive regression trees layer giving per-residue 95% credible intervals, with a covariate-shift check that abstains on the 13% of sites outside measured support.</dd>
+            <dt>ceiling</dt><dd>bounded the achievable ceiling near 0.88 and showed the wall is label noise rather than the model.</dd>
+            <dt>beyond</dt><dd>structure-based design work in the same programme, on private repositories.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://yanglab-emory.github.io/">emory, yang lab</a>
+          <span class="when">2024 &ndash; now</span>
+        </span>
+        <span class="role">computational genomics research intern</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>work</dt><dd>bayesian variable selection with spike-and-slab priors over 1,647 multi-omic rosmap samples, then an end-to-end gift fine-mapping pipeline across distributed slurm job arrays against gwas summary statistics from 111,326 cases and 677,663 controls.</dd>
+            <dt>result</dt><dd>26 alzheimer&rsquo;s risk genes that three published cis-only methods missed, over 1,000 hpc compute hours. first author on an abstract accepted to ashg 2026.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a href="https://med.emory.edu/departments/biochemistry/research-labs/roberts/index.html" class="name">emory, roberts lab</a>
+          <span class="when">2025 &ndash; 2026</span>
+        </span>
+        <span class="role">computational proteomics research intern</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>work</dt><dd>a differential-expression pipeline in r over a sparse 34-patient als cohort, chaining tampor batch-effect normalization, random-forest imputation and empirical-bayes moderated tests under fdr control. separately, a distributed molecular dynamics pipeline on aws parallelcluster, replicas fanned across slurm gpu arrays with openmm and cuda under amber ff19sb/opc at a 4 fs timestep.</dd>
+            <dt>result</dt><dd>1,038 als and 1,628 alzheimer&rsquo;s csf nitropeptide sites mapped against the fragpipe search database, filtered to 506 and 479 high-confidence residues for conservation analysis.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://www.bu.edu/summer/high-school-programs/rise/">bu, school of medicine</a>
+          <span class="when">2025</span>
+        </span>
+        <span class="role">rise research intern</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>cohort</dt><dd>rise neurobiology program. one of 130 high school researchers selected nationwide.</dd>
+            <dt>work</dt><dd>a multiscale systems-biology model of mbdnf and probdnf neurotrophin signaling, coupled odes across a closed-system neural network simulating neuronal growth against apoptosis, plus de novo homology modeling and docking of an uncharacterized probdnf isoform.</dd>
+            <dt>result</dt><dd>a probdnf to mbdnf ratio of 7.1 as the bifurcation point for network-wide collapse, piecewise regression improving fit 38.9% over linear. accepted as a society for neuroscience late-breaking presentation.</dd>
+          </dl>
+        </details>
+      </li>
+
+    </ul>
+  </section>
+
+  <section>
+    <h2>accolades</h2>
+    <ul class="rows">
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://isef.net/project/cbio006-biclonal-antibodies-to-prevent-ferroptosis-in-ad">regeneron isef</a>
+          <span class="when">2024 &ndash; 2025</span>
+        </span>
+        <span class="role">3rd place grand award, computational biology &middot; 2&times; international finalist</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>ferromilab</dt><dd>3rd place grand award, computational biology. bispecific antibody design against the hepcidin&ndash;ferroportin interface to preserve iron export and blunt ferroptosis in alzheimer&rsquo;s.</dd>
+            <dt>neuropath</dt><dd><a href="https://isef.net/project/cbio028-bdnf-transcytosis-for-alzheimers-treatment">a serotransferrin-conjugated liposomal nanocarrier</a> targeting the tfr1 receptor, shuttling bdnf across the blood-brain barrier by receptor-mediated transcytosis.</dd>
+            <dt>finalist</dt><dd>both years.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <span class="name">ashg annual meeting</span>
+          <span class="when">2026</span>
+        </span>
+        <span class="role">first-author abstract accepted</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>meeting</dt><dd>american society of human genetics annual meeting.</dd>
+            <dt>abstract</dt><dd>the bgw-twas and gift fine-mapping work from the yang lab: 26 alzheimer&rsquo;s risk genes recovered that three published cis-only methods missed.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a href="https://www.sfn.org/-/media/SfN/Documents/NEW-SfN/Meetings/Neuroscience-2025/Abstracts-and-Sessions/Abstract-PDFs/SFN25_Abstracts-PDF-LB_Final.pdf" class="name">society for neuroscience</a>
+          <span class="when">2025</span>
+        </span>
+        <span class="role">neuroscience 2025 late-breaking abstract</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>abstract</dt><dd>the neurotrophin modeling from the bu rise program: a probdnf to mbdnf ratio of 7.1 as the bifurcation point for network-wide collapse.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <span class="name">american academy of neurology</span>
+          <span class="when">2025</span>
+        </span>
+        <span class="role">invited presentation</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>meeting</dt><dd>annual neuroscience research conference.</dd>
+            <dt>presented</dt><dd>the neurotrophin work from the bu rise program: coupled odes across a closed-system neural network simulating neuronal growth against apoptosis, with de novo homology modeling and docking of an uncharacterized probdnf isoform.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <span class="name">y combinator startup school</span>
+          <span class="when">2026</span>
+        </span>
+        <span class="role">~7% admit cohort &middot; $25,000 in credits</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>credits</dt><dd>$25,000 in cloud compute from anthropic, google cloud and aws, which is what runs eidola.</dd>
+          </dl>
+        </details>
+      </li>
+
+    </ul>
+  </section>
+
+  <section>
+    <h2>projects</h2>
+    <ul class="rows">
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://www.eidola.me">eidola</a>
+          <span class="tech">next.js &middot; fastapi &middot; pgvector &middot; swift</span>
+        </span>
+        <span class="role">multi-tenant memory app with 106 active users.</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>role</dt><dd>founder and sole engineer: frontend, backend, ios, and infrastructure.</dd>
+            <dt>built</dt><dd>a next.js bff and a fastapi service on cloud run, supabase postgres under row-level security, inngest for async extraction and topic reconciliation, stripe billing.</dd>
+            <dt>retrieval</dt><dd>an hnsw index over 3,072-dimension half-precision embeddings in pgvector, per-user hdbscan topic clustering, and answers streamed token by token over server-sent events.</dd>
+            <dt>scale</dt><dd>106 active users, 149 rest endpoints, 103 test suites, and a 20.5k-line swift ios and watchos client.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a href="https://github.com/ArpitRamani/BGW-TWAS-PWAS-on-AD-dementia" class="name">bgw-twas fine-mapping</a>
+          <span class="tech">r &middot; slurm &middot; gwas &middot; twas</span>
+        </span>
+        <span class="role">gene-level fine-mapping across 789k gwas samples on slurm arrays.</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>problem</dt><dd>predixcan, fusion and tigar read cis-eqtls only, and trans effects carry roughly a third of trait-associated gwas signal.</dd>
+            <dt>method</dt><dd>bayesian variable selection with spike-and-slab priors over 1,647 multi-omic rosmap samples, then gift fine-mapping across distributed slurm job arrays against bellenguez gwas summary statistics (111,326 cases, 677,663 controls).</dd>
+            <dt>result</dt><dd>26 alzheimer&rsquo;s risk genes that three published cis-only methods missed, over 1,000 hpc compute hours. first author on an abstract accepted to ashg 2026.</dd>
+            <dt>walkthrough</dt><dd><a href="https://www.youtube.com/watch?v=tjXXktRvQ8k">code walkthrough of the pipeline, start to finish</a>.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a href="https://github.com/ArpitRamani/cas9-domain-insertion-tolerance" class="name">cas9 insertion tolerance</a>
+          <span class="tech">python &middot; sklearn &middot; bart &middot; dca</span>
+        </span>
+        <span class="role">calibrated protein engineering that abstains outside measured support.</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>problem</dt><dd>for each of 1,368 spcas9 positions, predict whether an inserted folded domain leaves the enzyme working.</dd>
+            <dt>method</dt><dd>mean-field direct-coupling analysis over a 5,254-sequence alignment paired with graph-topology descriptors of the coupling network, trained as a random forest under leave-one-block-out cross-validation. a bart layer adds calibrated per-residue 95% credible intervals and abstains on the 13% of sites outside measured support.</dd>
+            <dt>result</dt><dd>0.852 auroc against 0.826 for the prior in-house baseline (paired-bootstrap 95% ci [+0.002,&nbsp;+0.046]) and 0.777 for prodomino, the published sequence-model state of the art. the ceiling sits near 0.88, and the wall is label noise rather than the model.</dd>
+            <dt>code</dt><dd>the public repository holds the bart calibration phase; the coevolution model is not yet pushed.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a href="https://github.com/ArpitRamani/Ramani-McEachinSpinalCord-RAnalysis" class="name">als spinal cord proteomics</a>
+          <span class="tech">r &middot; limma &middot; tampor &middot; fragpipe</span>
+        </span>
+        <span class="role">differential expression over a sparse 34-patient cohort in r.</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>problem</dt><dd>nitro-tyrosine and nitro-tryptophan differential expression across the mceachin c9orf72 als spinal cord tmtpro set, 34 patients over two plexes.</dd>
+            <dt>method</dt><dd>tampor batch and loading normalization, a 50% missingness filter, random-forest imputation, then limma moderated t-tests under bh-fdr across three contrasts: c9 als against control, antisense-treated against control, and treated against untreated.</dd>
+            <dt>result</dt><dd>tampor keeps the ~124 sites detected in both plexes; a log2 median-centred fallback carries ~419 sparser sites with batch as a covariate. both modes ship, because a sparse modification is often sampled in one plex only.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://github.com/ArpitRamani/nitration-md">nitration md</a>
+          <span class="tech">openmm &middot; cuda &middot; amber &middot; slurm</span>
+        </span>
+        <span class="role">distributed molecular dynamics on aws parallelcluster gpu arrays.</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>question</dt><dd>whether nitration is site-selective rather than random oxidative damage. proton-coupled electron transfer predicts that nitrated aromatics sit beside a carboxylate proton acceptor and a thiol redox partner.</dd>
+            <dt>method</dt><dd>amber ff19sb/opc systems built through ambertools and run on openmm and cuda at a 4 fs timestep under hydrogen-mass repartitioning, with replicas fanned across slurm gpu arrays on aws parallelcluster.</dd>
+            <dt>result</dt><dd>per-aromatic donor-to-carboxylate distance, hydrogen-bond occupancy, ring-to-thiol distance and solvent exposure, compared between nitrated and non-nitrated residues inside the same trajectory.</dd>
+          </dl>
+        </details>
+      </li>
+
+      <li>
+        <span class="line">
+          <a class="name" href="https://isef.net/project/cbio006-biclonal-antibodies-to-prevent-ferroptosis-in-ad">ferromilab</a>
+          <span class="tech">alphafold &middot; rosetta &middot; haddock &middot; qm/mm</span>
+        </span>
+        <span class="role">bispecific antibody design against the hepcidin&ndash;ferroportin interface.</span>
+        <details>
+          <summary>details</summary>
+          <dl class="facts">
+            <dt>role</dt><dd>sole author, 2024 to 2025.</dd>
+            <dt>method</dt><dd>alphafold and modeller structure prediction and refinement, haddock epitope mapping, 1,352 grafted rosetta cdrs, and charmm qm/mm partitioned onto polar-contact residues to keep the quantum region tractable.</dd>
+            <dt>result</dt><dd>3rd place grand award in computational biology at regeneron isef. run on a100 gpus across google cloud, colab and ec2.</dd>
+          </dl>
+        </details>
+      </li>
+
+    </ul>
+  </section>
+
+  <section>
+    <h2>education</h2>
+    <ul class="rows">
+      <li>
+        <span class="line">
+          <a class="name" href="https://www.gatech.edu">georgia tech</a>
+          <span class="when">2026 &ndash; now</span>
+        </span>
+        <span class="role">b.s. computer science, theory and ai</span>
+      </li>
+      <li>
+        <span class="line">
+          <a class="name" href="https://www.wheelermagnet.com/">wheeler magnet school</a>
+          <span class="when">2022 &ndash; 2026</span>
+        </span>
+        <span class="role">advanced mathematics and sciences</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>tools</h2>
+    <dl class="stack">
+      <dt>languages</dt><dd>python, typescript, swift, r, sql, bash</dd>
+      <dt>ml</dt><dd>pytorch, scikit-learn, gradient boosting, bayesian methods, numpy</dd>
+      <dt>bio</dt><dd>fragpipe, limma, tampor, openmm, rosetta, alphafold, haddock</dd>
+      <dt>infra</dt><dd>docker, kubernetes, aws, cloud run, slurm, cuda, linux</dd>
+      <dt>web</dt><dd>next.js, react, fastapi, postgres, pgvector, supabase, stripe</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>otherwise</h2>
+    <dl class="stack">
+      <dt>reading</dt><dd>dostoevsky (white nights, first), kafka, orwell, tolstoy, gogol, dazai, hesse, marcus aurelius.</dd>
+      <dt>watching</dt><dd>scarface, the godfather i &amp; ii, goodfellas, once upon a time in america, casino, heat, the departed.</dd>
+      <dt>supporting</dt><dd>arsenal, real madrid, bayern munich, atlanta united.</dd>
+    </dl>
+  </section>
+
+  <p class="foot">
+    <a href="mailto:arpit.ramani07@gmail.com" aria-label="email" title="email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="5" width="18.8" height="14" rx="2.4"/><path d="m3.2 7 8.8 6.2L20.8 7"/></svg></a>
+    <a href="https://github.com/ArpitRamani" aria-label="github" title="github"><svg class="solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg></a>
+    <a href="https://www.linkedin.com/in/arpit-ramani-90697730b/" aria-label="linkedin" title="linkedin"><svg class="solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.75-2.05 4 0 4.75 2.6 4.75 6V21h-4v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.07 1.38-2.07 2.8V21H9z"/></svg></a>
+    <a href="resume.pdf" aria-label="resume" title="resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2.9H7.4a2 2 0 0 0-2 2v14.2a2 2 0 0 0 2 2h9.2a2 2 0 0 0 2-2V7.6z"/><path d="M13.8 3v4.6h4.6"/><path d="M8.8 12.6h6.4M8.8 16h4.4"/></svg></a>
+  </p>
+
+</div>
+
+</body>
+</html>

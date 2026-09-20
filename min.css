@@ -1,0 +1,464 @@
+/* ---------------------------------------------------------------------------
+   Arpit Ramani — minimal.
+
+   Two pages, one stylesheet. index.html is a centred paragraph; portfolio.html
+   is the same paragraph's worth of restraint applied to a long list. Dark only.
+   No images, no cards, no panels: hierarchy is size, weight and one accent.
+
+   Everything is lowercase in the markup itself rather than via text-transform,
+   so a screen reader and a copy-paste both get what the page shows.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg:      #0a0a0b;
+  --head:    #f2f2f0;   /* name, section headings, emphasis */
+  --text:    #9d9b98;   /* body copy */
+  --faint:   #787673;   /* dates, meta, punctuation between things */
+  --rule:    #1e1e20;
+  --accent:  #f2f2f0;   /* the highlight: links and row titles */
+  --accent-h:#ffffff;   /* and the only thing hover changes */
+
+  --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-size: 17px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.12s ease, text-decoration-color 0.12s ease;
+}
+a:hover { color: var(--accent-h); }
+
+/* Links inside running text keep a hairline underline, because on a monochrome
+   page nothing else distinguishes them from the emphasis around them. Row
+   titles get theirs only on hover: a list of twenty underlined names is a mess,
+   and there the pointer is already doing the asking. */
+.blurb a, .facts a {
+  text-decoration: underline;
+  text-decoration-color: #3b3b3e;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+.blurb a:hover, .facts a:hover { text-decoration-color: var(--head); }
+
+a.name {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+}
+a.name:hover { text-decoration-color: var(--head); }
+
+::selection { background: var(--head); color: var(--bg); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+
+/* =============================== landing =================================== */
+/* The whole point of the site: one block of text, vertically centred, with the
+   links directly under it. min-height uses svh so mobile browser chrome sliding
+   in and out does not shift the block. */
+
+body.landing {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 3rem 1.5rem;
+}
+
+.card {
+  max-width: 34rem;
+  width: 100%;
+}
+
+.hi {
+  margin: 0 0 1.4rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--head);
+}
+
+.blurb {
+  margin: 0;
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+.blurb strong {
+  color: var(--head);
+  font-weight: 600;
+}
+/* Y Combinator batch, kept quiet so it reads as an aside rather than a brag. */
+.yc { color: var(--faint); }
+
+/* The one destination on the page is a labelled link, not an icon: an icon can
+   only ever hint, and "portfolio" has no glyph everyone reads the same way. It
+   is the largest interactive thing here and sits on its own line above the
+   secondary links, so there is no competition for what to click. */
+.cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-top: 2.1rem;
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--head);
+  text-decoration: underline;
+  text-decoration-color: #46464a;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+.cta:hover {
+  color: #fff;
+  text-decoration-color: #fff;
+}
+/* The arrow leans into the hover. Its own element so the underline under the
+   label does not stretch as it moves. */
+.cta .arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.cta:hover .arrow { transform: translateX(3px); }
+
+/* Everything else is a secondary link and gets an icon: recognisable marks that
+   need no label, in a 2.4rem hit target with a ~21px glyph. The names live in
+   aria-label and title, so the row still reads to a screen reader and on
+   hover. */
+.links {
+  margin-top: 1.15rem;
+  margin-left: -0.55rem;   /* optically align the first glyph with the text */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem;
+}
+.links a {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  color: var(--faint);
+}
+.links a:hover {
+  color: var(--head);
+  background: #141416;
+}
+
+.links svg, .foot svg {
+  width: 1.3125rem;
+  height: 1.3125rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.links svg.solid, .foot svg.solid { fill: currentColor; stroke: none; }
+
+
+/* =============================== portfolio ================================= */
+
+body.work {
+  padding: 5rem 1.5rem 7rem;
+}
+
+.wrap {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 3.5rem;
+  font-size: 0.9rem;
+  color: var(--faint);
+}
+.back:hover { color: var(--accent); }
+
+.pagehead {
+  margin: 0 0 0.4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--head);
+}
+.pagesub {
+  margin: 0 0 4rem;
+  font-size: 0.98rem;
+}
+
+section { margin-bottom: 3.6rem; }
+
+h2 {
+  margin: 0 0 1.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rows > li {
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--rule);
+}
+.rows > li:last-child { border-bottom: 1px solid var(--rule); }
+
+/* Title on the left, year pushed to the right; they collapse onto separate
+   lines on a narrow screen because the row is allowed to wrap. */
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.55rem;
+}
+.name {
+  color: var(--head);
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+a.name { color: var(--accent); }
+a.name:hover { color: var(--accent-h); }
+.when {
+  margin-left: auto;
+  padding-left: 1rem;
+  font-size: 0.85rem;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.role {
+  display: block;
+  font-size: 0.95rem;
+  margin-top: 0.1rem;
+}
+.role .tag {
+  color: var(--faint);
+}
+/* Same right-hand slot as .when, but for a tech list, which is long enough that
+   it has to be allowed to wrap and does not want tabular figures. */
+.tech {
+  margin-left: auto;
+  padding-left: 1rem;
+  font-size: 0.85rem;
+  color: var(--faint);
+  text-align: right;
+}
+
+/* Detail disclosure. The marker is removed and replaced with a "+" that turns
+   into "−", because the default triangle is the only thing on the page with a
+   platform look. */
+details { margin-top: 0.45rem; }
+summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: max-content;
+  font-size: 0.85rem;
+  color: var(--faint);
+  cursor: pointer;
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before {
+  content: "+";
+  font-size: 0.95em;
+  line-height: 1;
+}
+details[open] > summary::before { content: "\2212"; }
+summary:hover { color: var(--accent); }
+
+.facts {
+  margin: 0.7rem 0 0.4rem;
+  padding: 0 0 0 0.9rem;
+  border-left: 1px solid var(--rule);
+  font-size: 0.93rem;
+}
+.facts dt {
+  color: var(--faint);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.75rem;
+}
+.facts dt:first-child { margin-top: 0; }
+.facts dd { margin: 0.1rem 0 0; }
+.facts a { color: var(--accent); }
+
+/* Stack of short "label — values" lines: tools, and the fun lists. */
+.stack {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+.stack dt {
+  color: var(--faint);
+  font-size: 0.85rem;
+}
+.stack dd { margin: 0; }
+
+.prose {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.prose .sep { color: var(--rule); padding: 0 0.15rem; }
+
+.foot {
+  margin-top: 4.5rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--faint);
+}
+.foot {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+/* The negative margin sits on the first icon, not on .foot, so the rule above
+   the row stays flush with every other section rule on the page. */
+.foot a:first-child { margin-left: -0.55rem; }
+.foot a {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  color: var(--faint);
+}
+.foot a:hover { color: var(--head); background: #141416; }
+
+@media (max-width: 34rem) {
+  body.work { padding-top: 3.5rem; }
+  .hi { font-size: 1.65rem; }
+  .when, .tech { margin-left: 0; padding-left: 0; text-align: left; }
+  .stack { grid-template-columns: 1fr; gap: 0.2rem 0; }
+  .stack dd { margin-bottom: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+
+/* ------------------------------ the greeting ------------------------------- */
+
+/* The <h1> holds two copies: a static "hi" for assistive tech and search, and
+   the animated one, which is aria-hidden so a screen reader is not read a new
+   word every two seconds. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* min-height, not height: the greeting changes width constantly and some of
+   the scripts (Devanagari, Japanese) are taller than latin, and without this
+   the paragraph below steps up and down as they cycle. */
+.glitch {
+  display: inline-block;
+  min-height: 1.15em;
+}
+
+/* Barely-there chromatic split, only while a word is resolving. Two channels
+   offset by a pixel is what makes it read as interference rather than as a
+   blur; at 0.25 alpha over a 1.9rem glyph it is felt more than seen, and the
+   page stays monochrome between transitions. */
+.glitch.is-glitching {
+  text-shadow:
+    -1px 0 rgba(120, 230, 255, 0.28),
+     1px 0 rgba(255, 110, 190, 0.24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch.is-glitching { text-shadow: none; }
+}
+
+
+/* ------------------------------ inline marks ------------------------------- */
+
+/* One real logo set in the sentence at type size: the Georgia Tech monogram,
+   which replaces the word outright because it is legible enough alone that
+   spelling it out too would be redundant.
+
+   Finaldose's mark is NOT here, and should not be added back at this size. It
+   is a halftone: a field of dots at roughly an 11.6px pitch in a 256px image.
+   Rendered 17px tall that pitch is 0.77px — finer than one device pixel — so
+   the dots alias into an orange smudge. No asset fixes it, because nothing is
+   wrong with the asset; the mark simply has a minimum size, and body copy is
+   under it. It reads correctly at the 32px slot on the portfolio page, and
+   that is about the floor. If a Finaldose logo is wanted here, it has to be
+   the wordmark lockup, not the dot.
+
+   Sized in em so it tracks the paragraph, and aligned by eye rather than by
+   baseline: the optical centre of a logo is never where the font's baseline
+   puts it. */
+.logomark {
+  display: inline-block;
+  width: auto;
+  vertical-align: -0.16em;
+  /* A word is read as part of the line; a logo is read as an object dropped
+     into it, and needs more air on both sides than a word space gives. The
+     left margin in particular keeps the "@" from looking attached to the
+     mark. */
+  margin: 0 0.22em 0 0.16em;
+}
+/* The GT file is two stacked paths, navy behind gold. On this background the
+   navy simply disappears and the gold face is left, which is Georgia Tech's
+   own treatment of the mark on dark. */
+/* No right margin on this one: the monogram's own artwork already carries
+   whitespace on its right edge, so the extra margin read as a double space
+   before "and". The word space in the markup is enough. */
+.logomark.gt {
+  height: 1.05em;
+  margin-right: 0;
+}
+/* A logo does not need an underline to look clickable, and one drawn under a
+   glyph like this looks like a mistake. Hover lifts it instead. */
+.blurb a.marklink {
+  text-decoration: none;
+}
+.logomark { transition: filter 0.12s ease; }
+.marklink:hover .logomark { filter: brightness(1.18); }
+
+/* The Finaldose lockup. The bare mark cannot be used at this size (see above),
+   but the wordmark can: the halftone circle still smudges at 19px, and next to
+   legible type it reads as part of a logo instead of as an unexplained dot. */
+.logomark.fd {
+  height: 1.25em;
+  vertical-align: -0.28em;
+}

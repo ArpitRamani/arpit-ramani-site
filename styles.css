@@ -45,7 +45,7 @@ body {
 main {
   max-width: 56rem;
   margin: 0 auto;
-  padding: 4.5rem 1.75rem 6rem;
+  padding: 3rem 1.75rem 6rem;
 }
 
 a { color: var(--head); text-decoration: none; }
@@ -136,6 +136,15 @@ a:hover .ext { color: var(--head); }
   mix-blend-mode: screen;
 }
 .introtext { min-width: 0; text-align: center; }
+
+/* The tab bar used to close the header: it carried the gap above the content
+   and the 1px rule under itself. With the tabs gone the header has to do both
+   jobs, or the name block and the first section run straight into each other. */
+header {
+  padding-bottom: 2.4rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--rule);
+}
 
 .ring {
   position: absolute;
@@ -237,59 +246,6 @@ h1 {
   stroke-linejoin: round;
 }
 .iconlinks svg.solid { fill: currentColor; stroke: none; }
-
-
-/* ---------------------------------- tabs ---------------------------------- */
-
-/* Off-screen rather than display:none, so the radios stay keyboard focusable. */
-.tabstate {
-  position: absolute;
-  width: 1px; height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 0.4rem;
-  margin-top: 2.4rem;
-  border-bottom: 1px solid var(--rule);
-}
-.tabs label {
-  padding: 0.6rem 1rem;
-  margin-bottom: -1px;
-  border-bottom: 2px solid transparent;
-  font-size: 0.98rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: var(--faint);
-  cursor: pointer;
-  user-select: none;
-}
-.tabs label:hover { color: var(--text); }
-
-.panel { display: none; }
-/* Any first child, not just a <section> — the corporate tab now opens with
-   the .duo wrapper, which silently lost this margin. */
-.panel > :first-child { margin-top: 3.2rem; }
-
-/* The state lives on the radios before <main>, so these reach forward into it.
-   Move the inputs and every one of these breaks. */
-#tab-corporate:checked ~ main .panel.corporate,
-#tab-fun:checked       ~ main .panel.fun { display: block; }
-
-#tab-corporate:checked ~ main .tabs label[for="tab-corporate"],
-#tab-fun:checked       ~ main .tabs label[for="tab-fun"] {
-  color: var(--head);
-  border-bottom-color: var(--head);
-}
-
-.tabstate:focus-visible ~ main .tabs label {
-  outline: 2px solid var(--head);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
 
 
 /* -------------------------------- sections -------------------------------- */
@@ -473,112 +429,6 @@ h2 {
 .tools dd { margin: 0; color: var(--text); }
 
 
-/* ------------------------------- cover grids ------------------------------- */
-
-
-.grid {
-  padding-top: 2.6rem;   /* room for the favorite callout above row one */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(7.6rem, 1fr));
-  gap: 1.6rem 1.2rem;
-}
-
-.tile { position: relative; margin: 0; }
-
-/* The wrapper holds the aspect ratio so the grid stays even while the images
-   are still loading. */
-a.art { display: block; }
-.art {
-  position: relative;
-  aspect-ratio: 2 / 3;
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--panel);
-  border: 1px solid var(--rule);
-}
-.art img {
-  width: 100%; height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-/* A hand-drawn note pointing at the favorite. Stacked: the sentence reads
-   first, then the arrow drops from it onto the poster below. It sits in the
-   space the grid reserves above its first row, and deliberately overflows its
-   tile sideways — the row above is empty, so nothing collides. */
-.fave {
-  position: absolute;
-  z-index: 2;
-  top: -3.6rem;
-  left: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  color: #e9c46a;
-  pointer-events: none;
-}
-.favetext {
-  font-family: "Caveat", "Bradley Hand", cursive;
-  font-size: 1.3rem;
-  font-weight: 700;
-  line-height: 1;
-  white-space: nowrap;
-  transform: rotate(-3deg);
-}
-/* Offset so the head lands over the poster rather than off its edge. */
-.favearrow {
-  /* Explicit height, not auto: as a flex item an SVG with height:auto
-     collapses to zero and the arrow disappears. 40x42 viewBox. */
-  width: 1.5rem;
-  height: 1.575rem;
-  flex: none;
-  margin: 0.3rem 0 0 1.9rem;   /* clears the descenders in the line above */
-}
-
-
-figcaption {
-  margin-top: 0.55rem;
-  font-size: 0.92rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-  color: var(--head);
-}
-.tile .meta {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--faint);
-}
-/* The callout already marks the favorite; the caption just gets a touch more
-   presence. */
-.tile.fav figcaption { color: #fff; }
-
-
-/* --------------------------------- teams --------------------------------- */
-
-.teams {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.2rem;
-}
-.team { margin: 0; text-align: center; width: 5.5rem; }
-.team img {
-  width: 4.5rem; height: 4.5rem;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-.team figcaption {
-  margin-top: 0.55rem;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-
-
-
 /* ----------------------------- project panels ----------------------------- */
 
 /* Each card carries a <details> that opens into a labelled panel. No script:
@@ -747,14 +597,14 @@ figcaption {
   /* No room beside the text on a phone: the sprite returns to flow and sits
      under the name block. */
   .cards { grid-template-columns: minmax(0, 1fr); }
-  main { padding: 2.5rem 1.25rem 4rem; }
+  main { padding: 1.9rem 1.25rem 4rem; }
   .handlebar { margin-bottom: 3rem; }
   h1 { font-size: 3rem; letter-spacing: -0.04em; }
   .lede { font-size: 1.15rem; }
   .avatar { width: 54px; height: 54px; }
   /* Side by side leaves the name about 190px on a phone. Stack instead. */
   /* Stacked, stretch would run the portrait the full width of the column. */
-  .intro { flex-direction: column; align-items: center; gap: 1.1rem; }
+  .intro { flex-direction: column; align-items: center; gap: 0.5rem; }
   /* It follows the text in source order so it lands to the right on a wide
      screen; stacked it belongs above the name, not under the icon row. */
   .pixelwrap { align-self: auto; order: -1; flex: none; width: min(15rem, 68vw); }
@@ -776,8 +626,6 @@ figcaption {
   .tools { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
   .tools dd { margin-bottom: 0.9rem; }
 
-  .grid { grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: 1.2rem 0.9rem; }
-
   /* No room for a side-by-side preview: the open card goes back to a stack. */
   .card:has(.more[open]) { grid-template-columns: minmax(0, 1fr); }
   .card:has(.more[open]) > .shot { grid-column: 1; grid-row: auto; margin-bottom: 0.85rem; }
@@ -791,8 +639,7 @@ figcaption {
 
 @media print {
   body { background: #fff; color: #222; }
-  h1, h2, .handle, .title, .title.plain, .card h3, figcaption { color: #000; }
-  .panel { display: block !important; }   /* print both tabs */
+  h1, h2, .handle, .title, .title.plain, .card h3 { color: #000; }
   .ext { display: none; }
   .more, .demo { display: none; }
 }
@@ -916,4 +763,36 @@ h1.hasparticles::selection { color: var(--head); }
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
+}
+
+
+/* -------------------------------- back link -------------------------------- */
+
+/* This page used to be the whole site; it is now what index.html sends people
+   to, so it needs a way back. Sized and coloured to match the same link on the
+   landing page (min.css, .back) even though the two pages share no stylesheet. */
+.backhome {
+  display: inline-block;
+  margin-bottom: 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--faint);
+}
+.backhome:hover { color: var(--head); }
+
+
+/* --------------------------------- footer ---------------------------------- */
+
+/* The icon row used to sit under the name, competing with the header art for
+   the first thing you look at. It lives here now: you meet it once you have
+   read the page and are deciding what to do about it. It is outside .panels on
+   purpose, so it shows under both the corporate and the fun tab. */
+.sitefoot {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.sitefoot .iconlinks {
+  margin-top: 0;
+  justify-content: center;
 }
