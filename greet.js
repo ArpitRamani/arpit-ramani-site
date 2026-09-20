@@ -20,9 +20,9 @@ const NOISE = '!<>-_\\/[]{}—=+*^?#$%&01';
 const el = document.querySelector('[data-greet]');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 
-const HOLD = 2400;   /* ms a greeting stays legible */
-const STEP = 55;     /* ms per character reveal */
-const JITTER = 22;   /* frames of noise before a character settles */
+const HOLD = 1100;    /* ms a greeting stays legible before the next scramble */
+const JITTER = 13;    /* frames of noise before a character settles */
+const STAGGER = 0.9;  /* frames each character waits behind the one before it */
 
 let timer = null;
 
@@ -32,7 +32,7 @@ function scramble(from, to) {
   const len = Math.max(from.length, to.length);
   const plan = [];
   for (let i = 0; i < len; i++) {
-    const start = Math.floor(Math.random() * 8) + i * 1.4;
+    const start = Math.floor(Math.random() * 5) + i * STAGGER;
     plan.push({ from: from[i] || '', to: to[i] || '', start, end: start + JITTER });
   }
 
