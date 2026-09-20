@@ -62,39 +62,6 @@ a:hover { color: #fff; }
 a:hover .ext { color: var(--head); }
 
 
-/* ------------------------------- handle bar ------------------------------- */
-
-.handlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  margin-bottom: 4rem;
-}
-
-/* A background-image, not an <img>: nothing for the browser to offer "open
-   image in new tab" on. Deterrence only — the file is still fetchable. */
-.avatar {
-  width: 56px; height: 56px;
-  flex: none;
-  display: block;
-  border-radius: 50%;
-  background-image: url("avatar.jpg");
-  background-size: cover;
-  background-position: center;
-  background-color: var(--rule);
-  user-select: none;
-  -webkit-user-drag: none;
-  -webkit-touch-callout: none;
-}
-
-.handle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--head);
-  letter-spacing: -0.02em;
-}
-
-
 /* --------------------------------- header --------------------------------- */
 
 /* Name block on the left, pixel portrait in the space on the right.
@@ -598,17 +565,14 @@ h2 {
      under the name block. */
   .cards { grid-template-columns: minmax(0, 1fr); }
   main { padding: 1.9rem 1.25rem 4rem; }
-  .handlebar { margin-bottom: 3rem; }
   h1 { font-size: 3rem; letter-spacing: -0.04em; }
   .lede { font-size: 1.15rem; }
-  .avatar { width: 54px; height: 54px; }
   /* Side by side leaves the name about 190px on a phone. Stack instead. */
   /* Stacked, stretch would run the portrait the full width of the column. */
   .intro { flex-direction: column; align-items: center; gap: 0.5rem; }
   /* It follows the text in source order so it lands to the right on a wide
      screen; stacked it belongs above the name, not under the icon row. */
   .pixelwrap { align-self: auto; order: -1; flex: none; width: min(15rem, 68vw); }
-  .handle { font-size: 1.25rem; }
 
 
   /* The date drops under the text rather than being squeezed against it. */
@@ -639,7 +603,7 @@ h2 {
 
 @media print {
   body { background: #fff; color: #222; }
-  h1, h2, .handle, .title, .title.plain, .card h3 { color: #000; }
+  h1, h2, .title, .title.plain, .card h3 { color: #000; }
   .ext { display: none; }
   .more, .demo { display: none; }
 }

@@ -21,6 +21,12 @@ films and clubs that the "me" tab carried. Nothing loads them. Delete them
 whenever; they are kept only because the deletion is easy to regret and
 trivial to redo.
 
+me.jpg          the source photograph. Nothing loads it: it is the master
+                that og.jpg and the three icons are generated from, kept so
+                they can be regenerated without hunting for the original.
+og.jpg          1200x630 link-preview card, referenced by both pages
+favicon-32.png favicon-48.png apple-touch-icon.png
+
 resume.pdf      linked from both pages
 portfolio-text.html  an unlinked text-only draft of the portfolio, kept only
                 so it is easy to go back to. Uses min.css. noindex + robots
@@ -183,9 +189,6 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
   corporate and the fun tab rather than only the one it was nested in. It
   carries email, resume, GitHub and LinkedIn — Instagram came out, as the one
   link there that is not about the work.
-- **The avatar is a CSS `background-image`, not an `<img>`,** so browsers do not
-  offer "open image in new tab" on it. That is deterrence, not protection: the
-  file is still at `avatar.jpg`.
 - Logos are trimmed, squared and exported at 256px for a 32px slot. Georgia Tech
   is an SVG, so it scales on its own; `object-fit: contain` centres it.
 - **The back link (`.backhome`) is the only thing added to this page** when
@@ -194,6 +197,33 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
 - **Its `<title>`, `og:url` and canonical point at `/portfolio.html`,** not
   at `/`. The `WebSite` JSON-LD node moved off it for the same reason; the
   `Person` node stays, with the same `@id` as the one on the landing page.
+
+## Notes: the photograph, the card and the icons
+
+- **`me.jpg` has had its bottom 90px cut off.** The original carried a Gemini
+  sparkle watermark at (944,962)-(994,1010) in a 1024x1040 frame. It is cropped
+  away rather than painted over, so there is nothing to resurface under a
+  different resize; the crop costs sweater, not subject.
+- **`og.jpg` is rendered on a canvas in the browser, not composed offline.**
+  That is the only way it gets the site's actual Plus Jakarta Sans — the font
+  is not installed on the machine, only served to the page. To regenerate it,
+  serve the directory with a handler that accepts a POST and writes the body to
+  disk, then draw the card in the page and `fetch` it to that endpoint. Rebuild
+  it whenever the name, the tagline or the photo changes.
+- **The icons are a face crop at (215,110)-(810,705) of the master,** with an
+  unsharp pass that gets stronger as the icon gets smaller: a face downscaled
+  to 32px loses the glasses and hairline without it. Be honest about the
+  ceiling — at the 16-20px Google renders a favicon, this reads as "a person",
+  not as a specific person. The white background is doing real work there; the
+  previous photo had foliage behind it and turned to mud.
+- **`favicon-48.png` exists because Google asks for 48px or a multiple.** The
+  32px is kept alongside it for browser tabs.
+- **Nothing guarantees which image a search engine shows.** `og:image`,
+  `twitter:image`, the `Person.image` and a `primaryImageOfPage` node all name
+  the card, which is as strong a signal as markup can give. But an actual
+  prominent `<img>` in the page outranks all of it, which is why the portfolio
+  page's search thumbnail may stay `omics.webp` — that page has a large image
+  in it and the landing page does not.
 
 ## Third-party images
 
