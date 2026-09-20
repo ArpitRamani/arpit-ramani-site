@@ -1,7 +1,4 @@
-# arpit ramani — personal site
-
-Static site. No framework, no build step. Two pages that are deliberately
-nothing like each other.
+# arpit ramani's personal site
 
 ```
 index.html      the door. One paragraph, one link, four icons.
