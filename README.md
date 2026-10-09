@@ -12,6 +12,11 @@ work.css        its stylesheet, loaded after min.css (shares its tokens/type)
 decode.js       the tabs, and the scramble that resolves text out of noise
 logos/          institution marks, set at type size beside each row
 
+me.html         the photo dump, linked as "me" from the landing page's icon
+                row: a small strip of photos drifting left to right on a loop
+belt.js         clones the strip once and paces the loop
+life/           its photos, WebP, 360px tall, metadata stripped (no GPS)
+
 styles.css site.js particles.js omics.webp shots/ are now UNREFERENCED —
 they belonged to the previous portfolio (cards, dialog, particle name). The
 old page is in the git history.
@@ -170,6 +175,31 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
   history entry per click, and the URL is left alone on first load.
 - **Its `<title>`, `og:url` and canonical point at `/portfolio.html`.** The
   `Person` node keeps the same `@id` as the one on the landing page.
+
+## Notes: the photo dump (`me.html`, `belt.js`, `life/`)
+
+- **It is a separate page on purpose.** The landing page stays a door; the
+  only trace there is the word "me" in the icon row (a word, because no glyph
+  reads as "photos of my life"). Photos on the landing itself, and a big
+  one-at-a-time slideshow, were both tried and cut as too big.
+- **The loop is seamless because the track is two identical copies.**
+  `belt.js` clones the row (clones are `aria-hidden`, empty alt) and the CSS
+  slides the track from `translateX(-50%)` to `0`. Spacing is a `margin-right`
+  on every item, not flex `gap`: with gap the track is one gap short of two
+  whole copies and the loop hitches by half a gap each lap.
+- **Speed is constant, not duration.** `belt.js` sets `--drift` from one
+  copy's width at 28px/s, so adding photos lengthens the lap rather than
+  speeding the belt up.
+- **`.belt` needs `contain: inline-size`.** Otherwise the track's full width
+  counts toward the card's intrinsic size, the landing grid widens the card,
+  and a phone scrolls sideways.
+- **Adding a photo:** convert, check it the right way up *in a browser* (HEIC
+  carries orientation as a flag that `sips` keeps and `cwebp` drops, so a file
+  can look right in Finder and land sideways), resize to 360px tall, encode
+  with `cwebp -metadata none`, and add an `<li>` with its `width`/`height`.
+  The caption lives in `title`.
+- Hover pauses the belt and colours the photo under the pointer; touch gets
+  colour; reduced motion turns the belt into a strip scrolled by hand.
 
 ## Notes: the photograph, the card and the icons
 

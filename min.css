@@ -165,6 +165,15 @@ body.landing {
   border-radius: 10px;
   color: var(--faint);
 }
+/* "me" is the one word in the row: there is no glyph for "photos of my
+   life" that reads at a glance. Same box height and colour as the icons, so
+   it sits on their baseline as one more link. */
+.links a.word {
+  width: auto;
+  padding: 0 0.6rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
 .links a:hover {
   color: var(--head);
   background: #141416;
@@ -180,6 +189,76 @@ body.landing {
   stroke-linejoin: round;
 }
 .links svg.solid, .foot svg.solid { fill: currentColor; stroke: none; }
+
+
+/* ------------------------------- the photos -------------------------------- */
+/* me.html: the photo dump. Same centred card as the landing page, with a
+   small strip of photos under the heading drifting left to right on a loop,
+   like a conveyor belt. belt.js clones the row once so the loop has no seam:
+   the track slides from -50% to 0, which is exactly one copy's width, then
+   starts over on an identical frame. The ends fade into the page so photos
+   arrive and leave rather than being cut off. */
+
+.card > .back { margin-bottom: 2.2rem; }
+.dumphead { margin-bottom: 1.4rem; }
+
+/* contain: inline-size stops the track's full width from counting toward the
+   card's size; without it the landing grid widens the card to fit every
+   photo and the page scrolls sideways on a phone. */
+.belt {
+  contain: inline-size;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.belt::-webkit-scrollbar { display: none; }
+.track {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Spacing is a margin on every photo, not flex gap: with gap the track is
+   one gap short of two whole copies, and the loop would hitch by half a gap
+   each time round. */
+.track li { margin-right: 0.6rem; }
+.track img {
+  display: block;
+  height: 9rem;
+  width: auto;
+  border-radius: 4px;
+}
+
+/* The drift. Duration is set by belt.js from the track's width, so the speed
+   is the same however many photos there are. */
+@keyframes drift {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.js .belt { overflow: hidden; }
+.js .track.moving {
+  animation: drift var(--drift, 60s) linear infinite;
+}
+/* Resting a pointer on the belt stops it, so a photo can be looked at. */
+.belt:hover .track { animation-play-state: paused; }
+
+/* Monochrome at rest like the rest of the page; the photo under the pointer
+   gets its colour. Touch screens have no hover, so they get colour. */
+@media (hover: hover) {
+  .track img {
+    filter: grayscale(1);
+    transition: filter 0.3s ease;
+  }
+  .track img:hover { filter: none; }
+}
+
+/* No drift for reduced motion: the strip just scrolls sideways by hand. */
+@media (prefers-reduced-motion: reduce) {
+  .js .belt { overflow-x: auto; }
+  .js .track.moving { animation: none; }
+}
 
 
 /* =============================== portfolio ================================= */
