@@ -249,16 +249,6 @@ body.landing {
 /* Resting a pointer on the belt stops it, so a photo can be looked at. */
 .belt:hover .track { animation-play-state: paused; }
 
-/* Monochrome at rest like the rest of the page; the photo under the pointer
-   gets its colour. Touch screens have no hover, so they get colour. */
-@media (hover: hover) {
-  .track img {
-    filter: grayscale(1);
-    transition: filter 0.3s ease;
-  }
-  .track img:hover { filter: none; }
-}
-
 /* No drift for reduced motion: the strip just scrolls sideways by hand. */
 @media (prefers-reduced-motion: reduce) {
   .js .belt { overflow-x: auto; }

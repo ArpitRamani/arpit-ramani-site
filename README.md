@@ -203,8 +203,9 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
   can look right in Finder and land sideways), resize to 720px tall, encode
   with `cwebp -metadata none`, and add an `<li>` with its `width`/`height`.
   The caption lives in `title`.
-- Hover pauses the belt and colours the photo under the pointer; touch gets
-  colour; reduced motion turns the belt into a strip scrolled by hand.
+- **The photos are always in full colour,** unlike the greyed logos on the
+  portfolio: the colour is the point of them. Hover pauses the belt; reduced
+  motion turns it into a strip scrolled by hand.
 
 ## Notes: writing (`me.html`, `writing/`)
 
