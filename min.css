@@ -199,8 +199,12 @@ body.landing {
    starts over on an identical frame. The ends fade into the page so photos
    arrive and leave rather than being cut off. */
 
+/* Wider than the landing card: the photos are the page here, so the column
+   opens up to most of a laptop screen and the photos take about a third of
+   its height. */
+.card.dump { max-width: 64rem; }
 .card > .back { margin-bottom: 2.2rem; }
-.dumphead { margin-bottom: 1.4rem; }
+.dumphead { margin-bottom: 1.6rem; font-size: 2.4rem; }
 
 /* contain: inline-size stops the track's full width from counting toward the
    card's size; without it the landing grid widens the card to fit every
@@ -223,12 +227,12 @@ body.landing {
 /* Spacing is a margin on every photo, not flex gap: with gap the track is
    one gap short of two whole copies, and the loop would hitch by half a gap
    each time round. */
-.track li { margin-right: 0.6rem; }
+.track li { margin-right: 0.9rem; }
 .track img {
   display: block;
-  height: 9rem;
+  height: clamp(12rem, 38svh, 22rem);
   width: auto;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 /* The drift. Duration is set by belt.js from the track's width, so the speed
@@ -258,6 +262,139 @@ body.landing {
 @media (prefers-reduced-motion: reduce) {
   .js .belt { overflow-x: auto; }
   .js .track.moving { animation: none; }
+}
+
+
+/* -------------------------------- writing ----------------------------------- */
+/* writing.html is the landing card with a list: one row per post, title on
+   the left, month on the right, newest first. Same hover as everywhere: the
+   title goes white and takes an underline. */
+
+.posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.posts:empty { display: none; }
+.posts a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 1rem;
+  padding: 0.45rem 0;
+}
+.posts .t {
+  color: var(--head);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+  transition: text-decoration-color 0.12s ease;
+}
+.posts a:hover .t { text-decoration-color: var(--head); }
+.posts .when { padding-left: 0; }
+.empty { margin: 0; color: var(--faint); }
+
+
+/* A post: one column held to a reading measure, a little larger and looser
+   than the rest of the site because it is meant to be read at length. Body
+   copy is --text grey and headings are --head, the same two voices as the
+   landing paragraph. */
+
+body.post {
+  padding: clamp(3rem, 12vh, 7rem) 1.5rem 7rem;
+}
+.entry {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 1.06rem;
+  line-height: 1.78;
+}
+.entry .back { margin-bottom: 2.6rem; }
+.entry h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--head);
+}
+.entry .date {
+  margin: 0 0 2.4rem;
+  font-size: 0.88rem;
+  color: var(--faint);
+}
+.entry h2 {
+  margin: 2.6rem 0 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--head);
+}
+.entry h3 {
+  margin: 2rem 0 0.6rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--head);
+}
+.entry p, .entry ul, .entry ol, .entry blockquote, .entry pre, .entry figure {
+  margin: 0 0 1.25rem;
+}
+.entry ul, .entry ol { padding-left: 1.3rem; }
+.entry li { margin-bottom: 0.35rem; }
+.entry li::marker { color: var(--faint); }
+.entry strong { color: var(--head); font-weight: 600; }
+.entry a {
+  text-decoration: underline;
+  text-decoration-color: #3b3b3e;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+.entry a:hover { text-decoration-color: var(--head); }
+.entry .back { text-decoration: none; }
+.entry blockquote {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--rule);
+  color: var(--faint);
+}
+.entry blockquote p:last-child { margin-bottom: 0; }
+.entry code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: #141416;
+  color: var(--head);
+}
+.entry pre {
+  overflow-x: auto;
+  padding: 1rem 1.1rem;
+  border-radius: 8px;
+  background: #111113;
+  border: 1px solid var(--rule);
+  line-height: 1.6;
+}
+.entry pre code { padding: 0; background: none; font-size: 0.86rem; color: var(--text); }
+.entry img {
+  display: block;
+  max-width: 100%;
+  max-height: 70svh;   /* a portrait photo should not outgrow the screen */
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.entry figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.86rem;
+  color: var(--faint);
+  text-align: center;
+}
+.entry hr {
+  margin: 2.6rem 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
 }
 
 

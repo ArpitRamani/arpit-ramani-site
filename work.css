@@ -23,15 +23,7 @@ body.index {
 }
 
 .sheet .back { margin-bottom: 2.4rem; }
-.sheet .hi { margin-bottom: 0.8rem; }
-
-.lede {
-  margin: 0 0 2rem;
-  max-width: 35.5rem;
-  font-size: 1.02rem;
-  line-height: 1.65;
-}
-
+.sheet .hi { margin-bottom: 1.3rem; }
 
 /* --------------------------------- tabs ------------------------------------ */
 /* Words, no chrome. The active one is --head; the rest are --faint and lift

@@ -15,7 +15,11 @@ logos/          institution marks, set at type size beside each row
 me.html         the photo dump, linked as "me" from the landing page's icon
                 row: a small strip of photos drifting left to right on a loop
 belt.js         clones the strip once and paces the loop
-life/           its photos, WebP, 360px tall, metadata stripped (no GPS)
+life/           its photos, WebP, 720px tall, metadata stripped (no GPS)
+
+writing.html    the list of posts, linked as "writing" from the icon row
+writing/        one HTML file per post; _template.html is the blank to copy
+                (noindex, robots Disallow, never linked)
 
 styles.css site.js particles.js omics.webp shots/ are now UNREFERENCED —
 they belonged to the previous portfolio (cards, dialog, particle name). The
@@ -188,18 +192,32 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
   on every item, not flex `gap`: with gap the track is one gap short of two
   whole copies and the loop hitches by half a gap each lap.
 - **Speed is constant, not duration.** `belt.js` sets `--drift` from one
-  copy's width at 28px/s, so adding photos lengthens the lap rather than
+  copy's width at 40px/s, so adding photos lengthens the lap rather than
   speeding the belt up.
 - **`.belt` needs `contain: inline-size`.** Otherwise the track's full width
   counts toward the card's intrinsic size, the landing grid widens the card,
   and a phone scrolls sideways.
 - **Adding a photo:** convert, check it the right way up *in a browser* (HEIC
   carries orientation as a flag that `sips` keeps and `cwebp` drops, so a file
-  can look right in Finder and land sideways), resize to 360px tall, encode
+  can look right in Finder and land sideways), resize to 720px tall, encode
   with `cwebp -metadata none`, and add an `<li>` with its `width`/`height`.
   The caption lives in `title`.
 - Hover pauses the belt and colours the photo under the pointer; touch gets
   colour; reduced motion turns the belt into a strip scrolled by hand.
+
+## Notes: writing (`writing.html`, `writing/`)
+
+- **A post is one HTML file, no build step.** Copy `writing/_template.html`
+  to `writing/<slug>.html`; the comment at its top lists what to change
+  (title, description, og/twitter, canonical, robots back to index), plus the
+  row in `writing.html` and the `<url>` in `sitemap.xml`.
+- **Posts use root-absolute paths** (`/min.css`, `/writing.html`) because
+  they live one folder down.
+- **The post column is `.entry`, not `.prose`.** `min.css` already has a
+  `.prose` for `portfolio-text.html` that zeroes its margin, which would pin
+  the post to the left edge.
+- `writing.html` shows "nothing here yet." until the first row goes in;
+  delete that line then. `.posts:empty` hides the list while it is empty.
 
 ## Notes: the photograph, the card and the icons
 

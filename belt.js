@@ -12,7 +12,7 @@
    sideways by hand. No dependency.
    --------------------------------------------------------------------------- */
 
-const SPEED = 28;   /* px per second: slow enough to look at, fast enough to read as moving */
+const SPEED = 40;   /* px per second: slow enough to look at, fast enough to read as moving */
 
 const track = document.querySelector('.track');
 
