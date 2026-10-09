@@ -5,14 +5,16 @@ index.html      the door. One paragraph, one link, four icons.
 min.css         its stylesheet
 greet.js        the greeting, cycling through languages with a scramble
 
-portfolio.html  everything else: the particle name, the project cards, the
-                experience and awards rows. This is the site that used to be
-                at /, and it is what the landing page sends people to.
-styles.css      its stylesheet
-site.js         progressive enhancement: details -> dialog
-particles.js    the <h1> as a particle simulation
-logos/ shots/   institution marks and project screenshots
+portfolio.html  everything else: experience, projects, awards, education and
+                stack, one list at a time behind a row of words. Each row
+                opens to its detail. It is what the landing page links to.
+work.css        its stylesheet, loaded after min.css (shares its tokens/type)
+decode.js       the tabs, and the scramble that resolves text out of noise
+logos/          institution marks, set at type size beside each row
 
+styles.css site.js particles.js omics.webp shots/ are now UNREFERENCED —
+they belonged to the previous portfolio (cards, dialog, particle name). The
+old page is in the git history.
 art/ and logos/team-*.png are now UNREFERENCED — they belonged to the books,
 films and clubs that the "me" tab carried. Nothing loads them. Delete them
 whenever; they are kept only because the deletion is easy to regret and
@@ -137,63 +139,37 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
   `robots.txt` and by a `noindex` meta. Its own notes are in the git history of
   this file (`git log -p README.md`).
 
-## Notes: the portfolio page (`portfolio.html`, `styles.css`)
+## Notes: the portfolio page (`portfolio.html`, `work.css`, `decode.js`)
 
-- **`site.js` is an enhancement, never a requirement.** The project panels ship
-  as `<details>` and work as accordions with scripting off. On load the script
-  lifts each one into a `<dialog>`, which is what gives Escape-to-close, a focus
-  trap and an inert background. Motion One comes from a CDN inside a `try`; if
-  it fails the modal still opens, just on the Web Animations API. Closing never
-  waits on an animation promise alone, because a throttled tab can leave one
-  pending and strand the dialog open.
-- **`particles.js` reads its type off the `<h1>`.** Font, weight, size and
-  letter-spacing all come from the real heading, so the canvas cannot move the
-  header. The heading keeps its text for selection, search and screen readers
-  and only goes `color: transparent` once particles are actually on screen.
-  Watch out: `getComputedStyle` is live, so the ink has to be read *before*
-  that class lands or the particles paint in `transparent`.
-- **Project panels are native `<details>`.** Same reason as the tabs: no script.
-  An open card takes the whole grid row and turns two-column (preview left,
-  title and blurb right), with the panel itself spanning both columns. That
-  layout rides on `:has()`; without it the card stays in its column and the
-  panel just opens narrow.
-- **The demo iframe must keep `loading="lazy"`.** Inside a closed `<details>`
-  the element has no box, so nothing is fetched from YouTube until someone
-  opens the card. Drop the attribute and every visitor pays for the embed on
-  first paint. Host is `youtube-nocookie.com` for the same reason.
-- **`.demonote` is scoped `.card .demonote`** so it outranks `.card p`, which
-  otherwise sets its size, color and a zero bottom margin.
-- **Color is monochrome on purpose.** Earlier drafts tried amber, aqua and orange
-  accents; all of them fought the film posters and institution logos, which bring
-  their own color. The one exception is the gold "my current favorite!" callout.
-- **There are no tabs, and the header has to close itself.** The page used to
-  be two radio-driven panels, `corporate` and `fun`. "fun" stopped fitting once
-  this became the portfolio rather than the whole site, and one tab is not a
-  tab, so both went — along with the radios, `.tabs`, `.panels`, `.panel`, and
-  the books/films/clubs markup and CSS. The tab bar was quietly doing two jobs
-  besides switching: it held the gap above the content and drew the 1px rule
-  under the header. `header` now carries both as its own `padding-bottom`,
-  `margin-bottom` and `border-bottom`. Take the border off and the name block
-  runs straight into "Experience".
-- **The header is otherwise deliberately tight.** `main`'s top padding, the
-  stacked `.intro` gap and `.backhome`'s bottom margin were all pulled in when
-  the icon row left the header. They are tuned against each other; change one
-  and the block goes lopsided.
-- **The icon row is in the footer, not the header.** It used to sit under the
-  name, competing with the header art for the first thing you look at; you now
-  meet it once you have read the page and are deciding what to do about it.
-  `.sitefoot` sits *outside* `.panels` on purpose, so it shows under both the
-  corporate and the fun tab rather than only the one it was nested in. It
-  carries email, resume, GitHub and LinkedIn — Instagram came out, as the one
-  link there that is not about the work.
-- Logos are trimmed, squared and exported at 256px for a 32px slot. Georgia Tech
-  is an SVG, so it scales on its own; `object-fit: contain` centres it.
-- **The back link (`.backhome`) is the only thing added to this page** when
-  it stopped being the site root. It matches `min.css`'s `.back` by eye,
-  because the two pages share no stylesheet.
-- **Its `<title>`, `og:url` and canonical point at `/portfolio.html`,** not
-  at `/`. The `WebSite` JSON-LD node moved off it for the same reason; the
-  `Person` node stays, with the same `@id` as the one on the landing page.
+- **It is the landing card, one step further.** Same column, type and
+  monochrome; one list on screen at a time, so it reads like the door rather
+  than like a CV. The résumé is where the exhaustive version lives.
+- **`decode.js` is an enhancement, never a requirement.** The markup is plain
+  `<section>`s of native `<details>`. With scripting off they stack under
+  their own `<h2>`s and open as accordions. The script builds the tab bar from
+  those headings, hides them, and plays the decode.
+- **The `js` class lands from an inline script in `<head>`,** not from the
+  module, so the stacked no-JS layout never flashes before the tabs appear.
+  `experience` carries `class="on"` in the markup for the same reason.
+- **The decode is the greeting's scramble, generalised.** It walks every text
+  node under an element, so links and spans inside a detail survive. The spread
+  is fixed in frames rather than per character: a long detail has to land as
+  fast as a two-word row. The element is pinned at its final height while it
+  runs, because noise glyphs are not the width of the letters they replace.
+- **Marks are greyed at rest and get their colour back on hover or open.** A
+  column of mixed brand colours otherwise shouts. Projects without a logo get
+  a line glyph (`#g-*` symbols at the top of the body) on the same stroke as
+  the landing icons. The marks do **not** glitch — that was tried and cut; the
+  scramble stays on text only.
+- **`min.css` still styles bare `summary`/`details`** for
+  `portfolio-text.html`, so `work.css` scopes its rules under `.sheet` to
+  outrank them (marker, `max-content` width, margins).
+- **Hover-dim is `@media (hover: hover)` only.** On touch a tap leaves `:hover`
+  stuck and the list would stay dimmed.
+- **Tabs write `#section` with `replaceState`,** so a tab is linkable without a
+  history entry per click, and the URL is left alone on first load.
+- **Its `<title>`, `og:url` and canonical point at `/portfolio.html`.** The
+  `Person` node keeps the same `@id` as the one on the landing page.
 
 ## Notes: the photograph, the card and the icons
 
@@ -224,9 +200,9 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
 
 ## Third-party images
 
-`portfolio.html` only. Institution and company marks belong to their owners. Book
-covers come from Open Library, film posters and club crests from Wikipedia.
+Institution and company marks in `logos/` belong to their owners.
 
 ## Deploy
 
-Any static host. GitHub Pages: enable Pages on the root of `main`.
+Vercel, via its GitHub integration: a push to `main` deploys production to
+arpitramani.com. Any static host would work; there is no build step.

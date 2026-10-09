@@ -1,0 +1,274 @@
+/* ---------------------------------------------------------------------------
+   The portfolio, as the landing card one step further.
+
+   Loaded after min.css and leans on it for the tokens, the type, .hi, .glitch,
+   .sr-only and .back. Same column, same monochrome, same scramble. The page
+   is a handful of lists behind a handful of words, and only one list is on
+   screen at a time, so it reads like the landing page rather than like a CV.
+   --------------------------------------------------------------------------- */
+
+/* Top-aligned rather than centred like the landing page: the lists are
+   different lengths, and a centred block would jump every time the tab
+   changes. The top padding puts the block roughly where the landing card
+   sits, so going from one page to the other does not move the eye. */
+body.index {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(3.5rem, 13vh, 8rem) 1.5rem 5rem;
+}
+
+.sheet {
+  max-width: 37rem;
+  margin: 0 auto;
+}
+
+.sheet .back { margin-bottom: 2.4rem; }
+.sheet .hi { margin-bottom: 0.8rem; }
+
+.lede {
+  margin: 0 0 2rem;
+  max-width: 35.5rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+
+/* --------------------------------- tabs ------------------------------------ */
+/* Words, no chrome. The active one is --head; the rest are --faint and lift
+   on hover. With scripting off the nav stays [hidden] and the section
+   headings show instead. */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.35rem;
+  margin: 0 0 1.6rem;
+}
+.tabs[hidden] { display: none; }
+.tabs button {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--faint);
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+.tabs button:hover { color: var(--text); }
+.tabs button[aria-selected="true"] { color: var(--head); }
+
+/* With JS, the tab bar replaces the section headings and only the selected
+   section shows. The class lands from an inline script in <head>, so there
+   is no flash of all sections stacked. */
+.js .sheet section > h2 { display: none; }
+.js .sheet section:not(.on) { display: none; }
+
+/* Without JS, the stacked sections need the headings and some air. */
+.sheet section { margin-bottom: 2.4rem; }
+.sheet h2 {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+
+
+/* --------------------------------- rows ------------------------------------ */
+/* One line each: a mark, the name in --head, the meta pushed right in
+   --faint. No rules between rows. */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* min.css styles a bare summary for portfolio-text.html (inline-flex,
+   max-content, its own + marker). Everything here is scoped to .sheet so it
+   outranks those rules instead of fighting them. */
+.sheet details { margin: 0; }
+.sheet summary::before,
+.sheet details[open] > summary::before { content: none; }
+
+.sheet summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.75rem;
+  width: auto;
+  padding: 0.4rem 0;
+  font-size: 1.04rem;
+  color: inherit;
+  cursor: pointer;
+  list-style: none;
+}
+.sheet summary::-webkit-details-marker { display: none; }
+
+.t {
+  color: var(--head);
+  font-weight: 500;
+}
+.m {
+  margin-left: auto;
+  font-size: 0.86rem;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A faint + after the name that turns into a minus: the one affordance a
+   row gets. */
+summary .t::after {
+  content: "+";
+  display: inline-block;
+  margin-left: 0.45em;
+  font-weight: 400;
+  color: var(--faint);
+  transition: color 0.12s ease;
+}
+details[open] > summary .t::after { content: "\2212"; }
+summary:hover .t::after { color: var(--head); }
+
+
+/* --------------------------------- marks ----------------------------------- */
+/* Logos at type size, the way the landing page sets them in its sentence.
+   At rest they are greyed and dimmed so a column of mixed brand colours does
+   not shout; the row you are on, or the one that is open, gets its colour
+   back. The square-tile marks (isef, sfn, yc, ashg) get a little rounding
+   so they sit with the transparent ones. */
+
+.mk {
+  flex: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+  border-radius: 3px;
+  filter: grayscale(1) brightness(1.15);
+  opacity: 0.55;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+summary:hover .mk,
+details[open] .mk {
+  filter: none;
+  opacity: 1;
+}
+
+/* The drawn glyphs for projects without a logo. Same stroke as the
+   landing page's icons. They have no colour to return to, so "on" is just
+   --head. */
+.mk.glyph {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mk.glyph .dots { stroke-width: 2.6; }
+summary:hover .mk.glyph,
+details[open] .mk.glyph { stroke: var(--head); }
+
+/* Pointing at a row pushes the others back. Hover-capable pointers only: on
+   touch, a tap leaves :hover stuck and the list would stay dimmed. */
+@media (hover: hover) {
+  .list > li { transition: opacity 0.18s ease; }
+  .list:has(> li:hover) > li:not(:hover) { opacity: 0.38; }
+}
+
+
+/* -------------------------------- details ---------------------------------- */
+/* Indented to sit under the name, past the mark, and held to a measure that
+   keeps each bullet to two or three lines. */
+
+.more {
+  padding: 0.15rem 0 1rem 1.95rem;
+  max-width: 34rem;
+  font-size: 0.93rem;
+  line-height: 1.62;
+}
+.more .sub {
+  margin: 0 0 0.55rem;
+  font-size: 0.86rem;
+  color: var(--faint);
+}
+.more ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.more ul li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.4rem;
+}
+.more ul li::before {
+  content: "\2013";
+  position: absolute;
+  left: 0;
+  color: var(--faint);
+}
+.kit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin: 0.65rem 0 0;
+  font-size: 0.84rem;
+  color: var(--faint);
+}
+.kit .go {
+  display: inline-flex;
+  gap: 0.9rem;
+  margin-left: auto;
+}
+.more a, .foot2 a {
+  color: var(--head);
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-color: #3b3b3e;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+.more a:hover, .foot2 a:hover { text-decoration-color: var(--head); }
+
+
+/* --------------------------------- stack ----------------------------------- */
+
+.kitlist {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.6rem 1rem;
+  margin: 0.3rem 0 0;
+  font-size: 0.95rem;
+}
+.kitlist dt { color: var(--faint); font-size: 0.88rem; }
+.kitlist dd { margin: 0; }
+
+.foot2 {
+  display: flex;
+  gap: 1.2rem;
+  margin: 2.6rem 0 0;
+  font-size: 0.88rem;
+}
+
+
+/* While decode.js is resolving a block, the chromatic split from the greeting
+   runs on it too, a little fainter because the text is smaller. */
+.decoding {
+  text-shadow:
+    -1px 0 rgba(120, 230, 255, 0.2),
+     1px 0 rgba(255, 110, 190, 0.17);
+}
+
+@media (max-width: 34rem) {
+  .m { margin-left: 1.95rem; flex-basis: 100%; }
+  .sheet summary { padding: 0.5rem 0; }
+  .more { padding-left: 0; }
+  .kit .go { margin-left: 0; }
+  .kitlist { grid-template-columns: 1fr; gap: 0.1rem 0; }
+  .kitlist dd { margin-bottom: 0.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decoding { text-shadow: none; }
+}
