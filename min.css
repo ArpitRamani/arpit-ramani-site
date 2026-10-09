@@ -204,7 +204,8 @@ body.landing {
    its height. */
 .card.dump { max-width: 64rem; }
 .card > .back { margin-bottom: 2.2rem; }
-.dumphead { margin-bottom: 1.6rem; font-size: 2.4rem; }
+.dumphead { margin-bottom: 1rem; font-size: 1.9rem; }
+.mesec + .mesec { margin-top: 2.8rem; }
 
 /* contain: inline-size stops the track's full width from counting toward the
    card's size; without it the landing grid widens the card to fit every
@@ -266,8 +267,8 @@ body.landing {
 
 
 /* -------------------------------- writing ----------------------------------- */
-/* writing.html is the landing card with a list: one row per post, title on
-   the left, month on the right, newest first. Same hover as everywhere: the
+/* The writing list on me.html: one row per post, title on the left, month
+   on the right, newest first. Same hover as everywhere: the
    title goes white and takes an underline. */
 
 .posts {

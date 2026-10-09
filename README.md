@@ -12,13 +12,14 @@ work.css        its stylesheet, loaded after min.css (shares its tokens/type)
 decode.js       the tabs, and the scramble that resolves text out of noise
 logos/          institution marks, set at type size beside each row
 
-me.html         the photo dump, linked as "me" from the landing page's icon
-                row: a small strip of photos drifting left to right on a loop
+me.html         linked as "me" from the landing page's icon row: the writing
+                list, then the photo dump, a strip of photos drifting left
+                to right on a loop
 belt.js         clones the strip once and paces the loop
 life/           its photos, WebP, 720px tall, metadata stripped (no GPS)
 
-writing.html    the list of posts, linked as "writing" from the icon row
-writing/        one HTML file per post; _template.html is the blank to copy
+writing/        one HTML file per post, listed on me.html above the photos;
+                _template.html is the blank to copy
                 (noindex, robots Disallow, never linked)
 
 styles.css site.js particles.js omics.webp shots/ are now UNREFERENCED —
@@ -205,18 +206,20 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
 - Hover pauses the belt and colours the photo under the pointer; touch gets
   colour; reduced motion turns the belt into a strip scrolled by hand.
 
-## Notes: writing (`writing.html`, `writing/`)
+## Notes: writing (`me.html`, `writing/`)
 
 - **A post is one HTML file, no build step.** Copy `writing/_template.html`
   to `writing/<slug>.html`; the comment at its top lists what to change
   (title, description, og/twitter, canonical, robots back to index), plus the
-  row in `writing.html` and the `<url>` in `sitemap.xml`.
-- **Posts use root-absolute paths** (`/min.css`, `/writing.html`) because
+  row in the writing list on `me.html` and the `<url>` in `sitemap.xml`.
+- **Posts use root-absolute paths** (`/min.css`, `/me.html`) because
   they live one folder down.
 - **The post column is `.entry`, not `.prose`.** `min.css` already has a
   `.prose` for `portfolio-text.html` that zeroes its margin, which would pin
   the post to the left edge.
-- `writing.html` shows "nothing here yet." until the first row goes in;
+- **Writing lives on `me.html`, above the photo dump,** not on its own page
+  or in the landing icon row. It shows "nothing here yet." until the first
+  row goes in;
   delete that line then. `.posts:empty` hides the list while it is empty.
 
 ## Notes: the photograph, the card and the icons
