@@ -19,7 +19,7 @@ const LEVELS = 24;
 const LO = -1.25, HI = 0.18;
 const TRAIL = 200;        /* positions kept per optimizer */
 const LIFE = 1400;        /* frames before an optimizer fades out and restarts (~45s) */
-const N_OPT = 4;
+const N_OPT = 0;
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const canvas = document.createElement('canvas');
