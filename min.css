@@ -2,21 +2,25 @@
    Arpit Ramani — minimal.
 
    Two pages, one stylesheet. index.html is a centred paragraph; portfolio.html
-   is the same paragraph's worth of restraint applied to a long list. Dark only.
-   No images, no cards, no panels: hierarchy is size, weight and one accent.
+   is the same paragraph's worth of restraint applied to a long list. Light
+   only: near-black type on white, with a faint dot grid at the edges of the
+   page. No cards, no panels: hierarchy is size, weight and one accent.
 
    Everything is lowercase in the markup itself rather than via text-transform,
    so a screen reader and a copy-paste both get what the page shows.
    --------------------------------------------------------------------------- */
 
 :root {
-  --bg:      #0a0a0b;
-  --head:    #f2f2f0;   /* name, section headings, emphasis */
-  --text:    #9d9b98;   /* body copy */
-  --faint:   #787673;   /* dates, meta, punctuation between things */
-  --rule:    #1e1e20;
-  --accent:  #f2f2f0;   /* the highlight: links and row titles */
-  --accent-h:#ffffff;   /* and the only thing hover changes */
+  --bg:      #ffffff;
+  --head:    #111113;   /* name, section headings, emphasis */
+  --text:    #55534f;   /* body copy */
+  --faint:   #76736e;   /* dates, meta, punctuation between things */
+  --rule:    #ebeae7;
+  --line:    #d2d0cb;   /* resting underlines */
+  --wash:    #f3f2ef;   /* hover fill behind icons, code */
+  --dot:     #d6d4cf;   /* the background grid */
+  --accent:  #111113;   /* the highlight: links and row titles */
+  --accent-h:#000000;   /* and the only thing hover changes */
 
   --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
@@ -41,6 +45,22 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* The one piece of decoration: a dot grid, like engineering paper, masked
+   so it is clear behind the text and only shows toward the edges. Fixed, so
+   it stays put while a long page scrolls over it. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px);
+  background-size: 22px 22px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 35%, #000 100%);
+          mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 35%, #000 100%);
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
@@ -54,7 +74,7 @@ a:hover { color: var(--accent-h); }
    and there the pointer is already doing the asking. */
 .blurb a, .facts a {
   text-decoration: underline;
-  text-decoration-color: #3b3b3e;
+  text-decoration-color: var(--line);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22em;
 }
@@ -129,13 +149,13 @@ body.landing {
   font-weight: 600;
   color: var(--head);
   text-decoration: underline;
-  text-decoration-color: #46464a;
+  text-decoration-color: var(--line);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.3em;
 }
 .cta:hover {
-  color: #fff;
-  text-decoration-color: #fff;
+  color: var(--accent-h);
+  text-decoration-color: var(--accent-h);
 }
 /* The arrow leans into the hover. Its own element so the underline under the
    label does not stretch as it moves. */
@@ -176,7 +196,7 @@ body.landing {
 }
 .links a:hover {
   color: var(--head);
-  background: #141416;
+  background: var(--wash);
 }
 
 .links svg, .foot svg {
@@ -338,7 +358,7 @@ body.post {
 .entry strong { color: var(--head); font-weight: 600; }
 .entry a {
   text-decoration: underline;
-  text-decoration-color: #3b3b3e;
+  text-decoration-color: var(--line);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22em;
 }
@@ -355,14 +375,14 @@ body.post {
   font-size: 0.88em;
   padding: 0.1em 0.35em;
   border-radius: 4px;
-  background: #141416;
+  background: var(--wash);
   color: var(--head);
 }
 .entry pre {
   overflow-x: auto;
   padding: 1rem 1.1rem;
   border-radius: 8px;
-  background: #111113;
+  background: var(--wash);
   border: 1px solid var(--rule);
   line-height: 1.6;
 }
@@ -564,7 +584,7 @@ summary:hover { color: var(--accent); }
   border-radius: 10px;
   color: var(--faint);
 }
-.foot a:hover { color: var(--head); background: #141416; }
+.foot a:hover { color: var(--head); background: var(--wash); }
 
 @media (max-width: 34rem) {
   body.work { padding-top: 3.5rem; }
@@ -601,19 +621,6 @@ summary:hover { color: var(--accent); }
   min-height: 1.15em;
 }
 
-/* Barely-there chromatic split, only while a word is resolving. Two channels
-   offset by a pixel is what makes it read as interference rather than as a
-   blur; at 0.25 alpha over a 1.9rem glyph it is felt more than seen, and the
-   page stays monochrome between transitions. */
-.glitch.is-glitching {
-  text-shadow:
-    -1px 0 rgba(120, 230, 255, 0.28),
-     1px 0 rgba(255, 110, 190, 0.24);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glitch.is-glitching { text-shadow: none; }
-}
 
 
 /* ------------------------------ inline marks ------------------------------- */
@@ -644,9 +651,8 @@ summary:hover { color: var(--accent); }
      mark. */
   margin: 0 0.22em 0 0.16em;
 }
-/* The GT file is two stacked paths, navy behind gold. On this background the
-   navy simply disappears and the gold face is left, which is Georgia Tech's
-   own treatment of the mark on dark. */
+/* The GT file is two stacked paths, navy behind gold; on white both show,
+   which is the mark as Georgia Tech prints it. */
 /* No right margin on this one: the monogram's own artwork already carries
    whitespace on its right edge, so the extra margin read as a double space
    before "and". The word space in the markup is enough. */
@@ -660,7 +666,7 @@ summary:hover { color: var(--accent); }
   text-decoration: none;
 }
 .logomark { transition: filter 0.12s ease; }
-.marklink:hover .logomark { filter: brightness(1.18); }
+.marklink:hover .logomark { filter: brightness(0.85); }
 
 /* The Finaldose lockup. The bare mark cannot be used at this size (see above),
    but the wordmark can: the halftone circle still smudges at 19px, and next to

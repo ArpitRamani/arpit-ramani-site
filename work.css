@@ -137,8 +137,8 @@ summary:hover .t::after { color: var(--head); }
   height: 1.2rem;
   object-fit: contain;
   border-radius: 3px;
-  filter: grayscale(1) brightness(1.15);
-  opacity: 0.55;
+  filter: grayscale(1);
+  opacity: 0.5;
   transition: filter 0.2s ease, opacity 0.2s ease;
 }
 summary:hover .mk,
@@ -217,7 +217,7 @@ details[open] .mk.glyph { stroke: var(--head); }
   color: var(--head);
   white-space: nowrap;
   text-decoration: underline;
-  text-decoration-color: #3b3b3e;
+  text-decoration-color: var(--line);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22em;
 }
@@ -244,14 +244,6 @@ details[open] .mk.glyph { stroke: var(--head); }
 }
 
 
-/* While decode.js is resolving a block, the chromatic split from the greeting
-   runs on it too, a little fainter because the text is smaller. */
-.decoding {
-  text-shadow:
-    -1px 0 rgba(120, 230, 255, 0.2),
-     1px 0 rgba(255, 110, 190, 0.17);
-}
-
 @media (max-width: 34rem) {
   .m { margin-left: 1.95rem; flex-basis: 100%; }
   .sheet summary { padding: 0.5rem 0; }
@@ -259,8 +251,4 @@ details[open] .mk.glyph { stroke: var(--head); }
   .kit .go { margin-left: 0; }
   .kitlist { grid-template-columns: 1fr; gap: 0.1rem 0; }
   .kitlist dd { margin-bottom: 0.7rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .decoding { text-shadow: none; }
 }

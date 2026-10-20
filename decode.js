@@ -1,8 +1,7 @@
 /* ---------------------------------------------------------------------------
-   The portfolio's one piece of motion: text resolving out of noise, the same
-   scramble as the greeting on the landing page, applied to whatever just
-   appeared — the heading on load, a list when its tab is picked, a detail
-   when its row is opened.
+   The portfolio's one piece of motion: the heading resolving out of noise
+   on load, the same scramble as the greeting on the landing page. Only the
+   heading: scrambling every row on every tab switch was too much.
 
    An enhancement, never a requirement. The markup is three sections of
    native <details>; with scripting off they stack under their own headings
@@ -132,22 +131,8 @@ function show(id, animate) {
      history entry per click. */
   if (!animate) return;
   history.replaceState(null, '', '#' + target.id);
-  rowsOf(target).forEach((row, k) => decode(row, k * 45));
 }
-
-/* What resolves when a section appears: each row's summary, or for the
-   stack list each term and its values. */
-function rowsOf(section) {
-  return section.querySelectorAll(':scope > .list > li > details > summary, :scope > .kitlist > *');
-}
-
-/* A detail decodes as it opens. Closing is instant: the eye is already
-   leaving. */
-document.querySelectorAll('.sheet details').forEach((d) => {
-  d.addEventListener('toggle', () => { if (d.open) decode(d.querySelector('.more')); });
-});
 
 show(location.hash.slice(1), false);
 
 document.querySelectorAll('[data-decode-on-load]').forEach((el) => decode(el));
-rowsOf(document.querySelector('.sheet section.on')).forEach((row, k) => decode(row, 120 + k * 45));

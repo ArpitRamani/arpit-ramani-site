@@ -20,8 +20,8 @@ const NOISE = '!<>-_\\/[]{}—=+*^?#$%&01';
 const el = document.querySelector('[data-greet]');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 
-const HOLD = 1100;    /* ms a greeting stays legible before the next scramble */
-const JITTER = 13;    /* frames of noise before a character settles */
+const HOLD = 2400;    /* ms a greeting stays legible before the next scramble */
+const JITTER = 10;    /* frames of noise before a character settles */
 const STAGGER = 0.9;  /* frames each character waits behind the one before it */
 
 let timer = null;
@@ -47,7 +47,7 @@ function scramble(from, to) {
         else { out += c.from; }
       }
       el.textContent = out;
-      if (done === plan.length) { el.classList.remove('is-glitching'); resolve(); return; }
+      if (done === plan.length) { resolve(); return; }
       frame++;
       timer = requestAnimationFrame(tick);
     })();
@@ -56,7 +56,6 @@ function scramble(from, to) {
 
 async function cycle(i) {
   const next = GREETINGS[i % GREETINGS.length];
-  el.classList.add('is-glitching');
   await scramble(el.textContent, next);
   /* dir has to follow the word: without it the Arabic greeting drags the
      surrounding punctuation around with it. */
