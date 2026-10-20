@@ -61,6 +61,28 @@ body::before {
           mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 35%, #000 100%);
 }
 
+/* The margins of a lab notebook: a DNA double helix running down the left
+   edge, and on the right two skeletal formulas, adenine and an Ala-Ala-Ala
+   tripeptide, drawn in hairline ink (bg/, generated, all to scale). Wide
+   screens only: anything narrower and they would sit behind the text. */
+@media (min-width: 72rem) {
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      url("bg/helix.svg") left 2.5vw top 0 / 7rem auto repeat-y,
+      url("bg/molecules.svg") right 3vw center / 16rem auto no-repeat;
+  }
+  /* The photo page's column runs nearly to the right edge, and the belt
+     fades its photos out exactly where the molecules sit. Helix only. */
+  body:has(.card.dump)::after {
+    background: url("bg/helix.svg") left 2.5vw top 0 / 7rem auto repeat-y;
+  }
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
