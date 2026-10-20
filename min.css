@@ -3,8 +3,8 @@
 
    Two pages, one stylesheet. index.html is a centred paragraph; portfolio.html
    is the same paragraph's worth of restraint applied to a long list. Light
-   only: near-black type on white, over a slowly moving contour landscape at
-   the edges of the page (field.js). No cards, no panels: hierarchy is size,
+   only: near-black type on white, over a faint band of dots along the
+   bottom of the page (field.js). No cards, no panels: hierarchy is size,
    weight and one accent.
 
    Everything is lowercase in the markup itself rather than via text-transform,
@@ -19,7 +19,7 @@
   --rule:    #ebeae7;
   --line:    #d2d0cb;   /* resting underlines */
   --wash:    #f3f2ef;   /* hover fill behind icons, code */
-  --contour: #d3d0ca;   /* the background landscape (field.js) */
+  --dots:    #c4c1bb;   /* the background band (field.js) */
   --accent:  #111113;   /* the highlight: links and row titles */
   --accent-h:#000000;   /* and the only thing hover changes */
 

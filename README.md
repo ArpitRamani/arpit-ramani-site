@@ -3,7 +3,7 @@
 ```
 index.html      the door. One paragraph, one link, four icons.
 min.css         its stylesheet (and the shared tokens/type for every page)
-field.js        the moving contour landscape behind every page
+field.js        the band of dots along the bottom of every page (contact.json)
 
 portfolio.html  everything else: experience, projects, awards, education and
                 stack, one list at a time behind a row of words. Each row
@@ -52,26 +52,19 @@ list, it stops being a door.
 python3 -m http.server 8000
 ```
 
-## Notes: the background (`field.js`)
+## Notes: the background (`field.js`, `contact.json`, `data/contact.py`)
 
-- **One surface, read two ways.** To a chemist it is a free-energy landscape;
-  to someone training a model it is a loss landscape. Six Gaussian wells drift
-  on slow Lissajous paths and their depths breathe, every period a different
-  number of seconds, so the contours flow without visibly repeating. A random
-  time offset per visit means each load starts on a different landscape.
-- **The dots are optimizers.** Heavy-ball momentum on the same surface, chasing
-  minima that move out from under them — post-training in one picture. Each
-  run fades in on a slope outside the text, and fades out after ~45s, or once
-  settled, so they do not all end up in one well.
-- **Marching squares at fixed levels** on an 11px grid, so contours appear and
-  vanish smoothly as the surface moves through a level. ~4ms a frame at
-  1440x900, capped at ~30fps; `requestAnimationFrame` stops in background tabs.
-- **An elliptical `destination-out` vignette clears the middle,** so the
-  landscape lives in the margins and never sits under text. Wider clear zone
-  under 700px.
-- **`prefers-reduced-motion` gets one still frame,** contours only.
-- **No glitch any more.** The scrambling greeting and the portfolio decode were
-  cut when the background started moving: one moving thing is enough.
+- **It is the SpCas9 coevolution map** behind the insertion-tolerance model:
+  mean-field DCA couplings (APC-corrected), max-pooled into 90x90 blocks and
+  turned 45 degrees so the diagonal lies flat, like a Hi-C map. Only the band
+  within 16 blocks of the diagonal is kept. Dot size is coupling strength.
+- **`data/contact.py` rebuilds `contact.json`** (~6 KB) from the local
+  `dca_matrix.npz`; the matrix itself is not in this repo.
+- **One motif, small uniform marks, low contrast.** Earlier attempts (contour
+  landscape, optimizer dots, helix and molecule art, a rotating Cas9 trace)
+  drew *things* and read as busy; this is the restraint they lacked.
+- **The only motion is a slow wave of dot size** along the band (14s per
+  wavelength), at ~30fps; `prefers-reduced-motion` gets the still band.
 
 ## Notes: the landing page (`index.html`, `min.css`)
 
