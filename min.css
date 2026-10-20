@@ -3,8 +3,9 @@
 
    Two pages, one stylesheet. index.html is a centred paragraph; portfolio.html
    is the same paragraph's worth of restraint applied to a long list. Light
-   only: near-black type on white, with a faint dot grid at the edges of the
-   page. No cards, no panels: hierarchy is size, weight and one accent.
+   only: near-black type on white, over a slowly moving contour landscape at
+   the edges of the page (field.js). No cards, no panels: hierarchy is size,
+   weight and one accent.
 
    Everything is lowercase in the markup itself rather than via text-transform,
    so a screen reader and a copy-paste both get what the page shows.
@@ -18,7 +19,7 @@
   --rule:    #ebeae7;
   --line:    #d2d0cb;   /* resting underlines */
   --wash:    #f3f2ef;   /* hover fill behind icons, code */
-  --dot:     #d6d4cf;   /* the background grid */
+  --contour: #d3d0ca;   /* the background landscape (field.js) */
   --accent:  #111113;   /* the highlight: links and row titles */
   --accent-h:#000000;   /* and the only thing hover changes */
 
@@ -45,42 +46,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* The one piece of decoration: a dot grid, like engineering paper, masked
-   so it is clear behind the text and only shows toward the edges. Fixed, so
-   it stays put while a long page scrolls over it. */
-body::before {
-  content: "";
+/* The landscape canvas field.js puts behind everything. */
+.field {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px);
-  background-size: 22px 22px;
-  background-position: center;
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 35%, #000 100%);
-          mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 35%, #000 100%);
-}
-
-/* The margins of a lab notebook: a DNA double helix running down the left
-   edge, and on the right two skeletal formulas, adenine and an Ala-Ala-Ala
-   tripeptide, drawn in hairline ink (bg/, generated, all to scale). Wide
-   screens only: anything narrower and they would sit behind the text. */
-@media (min-width: 72rem) {
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-      url("bg/helix.svg") left 2.5vw top 0 / 7rem auto repeat-y,
-      url("bg/molecules.svg") right 3vw center / 16rem auto no-repeat;
-  }
-  /* The photo page's column runs nearly to the right edge, and the belt
-     fades its photos out exactly where the molecules sit. Helix only. */
-  body:has(.card.dump)::after {
-    background: url("bg/helix.svg") left 2.5vw top 0 / 7rem auto repeat-y;
-  }
 }
 
 a {
@@ -621,11 +594,8 @@ summary:hover { color: var(--accent); }
 }
 
 
-/* ------------------------------ the greeting ------------------------------- */
+/* ------------------------------ screen readers ----------------------------- */
 
-/* The <h1> holds two copies: a static "hi" for assistive tech and search, and
-   the animated one, which is aria-hidden so a screen reader is not read a new
-   word every two seconds. */
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -634,15 +604,6 @@ summary:hover { color: var(--accent); }
   clip-path: inset(50%);
   white-space: nowrap;
 }
-
-/* min-height, not height: the greeting changes width constantly and some of
-   the scripts (Devanagari, Japanese) are taller than latin, and without this
-   the paragraph below steps up and down as they cycle. */
-.glitch {
-  display: inline-block;
-  min-height: 1.15em;
-}
-
 
 
 /* ------------------------------ inline marks ------------------------------- */

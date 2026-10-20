@@ -2,14 +2,14 @@
 
 ```
 index.html      the door. One paragraph, one link, four icons.
-min.css         its stylesheet
-greet.js        the greeting, cycling through languages with a scramble
+min.css         its stylesheet (and the shared tokens/type for every page)
+field.js        the moving contour landscape behind every page
 
 portfolio.html  everything else: experience, projects, awards, education and
                 stack, one list at a time behind a row of words. Each row
                 opens to its detail. It is what the landing page links to.
 work.css        its stylesheet, loaded after min.css (shares its tokens/type)
-decode.js       the tabs, and the scramble that resolves text out of noise
+tabs.js         the tab bar
 logos/          institution marks, set at type size beside each row
 
 me.html         linked as "me" from the landing page's icon row: the writing
@@ -52,33 +52,28 @@ list, it stops being a door.
 python3 -m http.server 8000
 ```
 
-## Notes: the landing page (`index.html`, `min.css`, `greet.js`)
+## Notes: the background (`field.js`)
 
-- **`greet.js` has no dependency and needs none.** The whole effect is one
-  `requestAnimationFrame` loop over a string; any library that does this is
-  larger than the loop. Each character gets its own start and end frame so the
-  word resolves left to right with a ragged edge instead of all at once, and the
-  noise alphabet is punctuation on purpose — scrambling with lowercase latin
-  just reads as a typo.
-- **The `<h1>` holds two copies of the greeting.** A static `hi` in `.sr-only`
-  for assistive tech and search, and the animated one, which is `aria-hidden`
-  so a screen reader is not handed a new word every two seconds. The animated
-  span also keeps a real `hi` in the markup, so with scripting off, or before
-  the module arrives, the page is correct and nothing shifts when it starts.
-- **`.glitch` needs `min-height`, not `height`.** Devanagari and Japanese are
-  taller than latin; without it the paragraph steps up and down as the greeting
-  cycles. The width changes freely — the block is left-aligned, so that costs
-  nothing.
-- **`dir` is set per word.** Without it the Arabic-script greeting drags the
-  surrounding punctuation around with it.
-- **The chromatic split is two text-shadows at ~0.25 alpha, only while a word is
-  resolving.** One pixel of offset on two channels is what makes it read as
-  interference rather than as a blur. Between transitions the page is
-  monochrome, and `prefers-reduced-motion` turns off both the shadow and the
-  cycle entirely.
-- **The loop stops on `visibilitychange`.** A background tab should not burn
-  frames, and returning to a half-scrambled word looks broken, so it resets to
-  `hi` on the way back.
+- **One surface, read two ways.** To a chemist it is a free-energy landscape;
+  to someone training a model it is a loss landscape. Six Gaussian wells drift
+  on slow Lissajous paths and their depths breathe, every period a different
+  number of seconds, so the contours flow without visibly repeating. A random
+  time offset per visit means each load starts on a different landscape.
+- **The dots are optimizers.** Heavy-ball momentum on the same surface, chasing
+  minima that move out from under them — post-training in one picture. Each
+  run fades in on a slope outside the text, and fades out after ~45s, or once
+  settled, so they do not all end up in one well.
+- **Marching squares at fixed levels** on an 11px grid, so contours appear and
+  vanish smoothly as the surface moves through a level. ~4ms a frame at
+  1440x900, capped at ~30fps; `requestAnimationFrame` stops in background tabs.
+- **An elliptical `destination-out` vignette clears the middle,** so the
+  landscape lives in the margins and never sits under text. Wider clear zone
+  under 700px.
+- **`prefers-reduced-motion` gets one still frame,** contours only.
+- **No glitch any more.** The scrambling greeting and the portfolio decode were
+  cut when the background started moving: one moving thing is enough.
+
+## Notes: the landing page (`index.html`, `min.css`)
 
 - **The Georgia Tech monogram is set in the sentence at type size,** replacing
   the word "gt" outright: it is legible enough alone that spelling it out too
@@ -97,17 +92,17 @@ python3 -m http.server 8000
 - **The lockup is 500x95 lossless WebP, ~18 KB.** It renders at 119 CSS px, so
   500 covers a 4x display with room over. Lossless on purpose: lossy WebP puts
   ringing into a flat halftone. Source is Finaldose's own dark-background PNG
-  at 1672x317; it has real transparency, so nothing had to be trimmed.
-- **The GT file is two stacked paths, navy behind gold.** On this background
-  the navy disappears and the gold face is left, which is Georgia Tech's own
-  treatment of the mark on dark. Nothing to fix — but it is why the logo looks
-  different here than on a white page.
+  at 1672x317; the `-dark` copy recolours its light-grey letters to near-black
+  for the white page and leaves the orange halftone alone. `logos/eidola-dark.png`
+  is the same treatment of the (white) Eidola mark.
+- **The GT file is two stacked paths, navy behind gold.** On white both show,
+  which is the mark as Georgia Tech prints it.
 - **A logo does not get an underline.** `.blurb a.marklink` turns it off, since
   a rule drawn under a glyph like the monogram reads as a mistake; hover lifts
   the brightness instead. The Finaldose *text* keeps its underline, which is
   why that mark sits outside the anchor.
 - **Monochrome otherwise.** Everything highlighted — row titles, links, the
-  name in the blurb — is `--head` off-white; everything else is grey. An earlier
+  name in the blurb — is `--head` near-black; everything else is grey. An earlier
   version tinted every proper noun with its own brand colour (Georgia Tech gold,
   Emory blue, Google's four colours on "cloud run", club colours on the teams).
   It worked, and it was too busy for the page. It is one commit back in the
@@ -149,28 +144,22 @@ The next few apply to `min.css`, so they cover `portfolio-text.html` too.
   `robots.txt` and by a `noindex` meta. Its own notes are in the git history of
   this file (`git log -p README.md`).
 
-## Notes: the portfolio page (`portfolio.html`, `work.css`, `decode.js`)
+## Notes: the portfolio page (`portfolio.html`, `work.css`, `tabs.js`)
 
 - **It is the landing card, one step further.** Same column, type and
   monochrome; one list on screen at a time, so it reads like the door rather
   than like a CV. The résumé is where the exhaustive version lives.
-- **`decode.js` is an enhancement, never a requirement.** The markup is plain
+- **`tabs.js` is an enhancement, never a requirement.** The markup is plain
   `<section>`s of native `<details>`. With scripting off they stack under
   their own `<h2>`s and open as accordions. The script builds the tab bar from
-  those headings, hides them, and plays the decode.
+  those headings and hides them.
 - **The `js` class lands from an inline script in `<head>`,** not from the
   module, so the stacked no-JS layout never flashes before the tabs appear.
   `experience` carries `class="on"` in the markup for the same reason.
-- **The decode is the greeting's scramble, generalised.** It walks every text
-  node under an element, so links and spans inside a detail survive. The spread
-  is fixed in frames rather than per character: a long detail has to land as
-  fast as a two-word row. The element is pinned at its final height while it
-  runs, because noise glyphs are not the width of the letters they replace.
 - **Marks are greyed at rest and get their colour back on hover or open.** A
   column of mixed brand colours otherwise shouts. Projects without a logo get
   a line glyph (`#g-*` symbols at the top of the body) on the same stroke as
-  the landing icons. The marks do **not** glitch — that was tried and cut; the
-  scramble stays on text only.
+  the landing icons.
 - **`min.css` still styles bare `summary`/`details`** for
   `portfolio-text.html`, so `work.css` scopes its rules under `.sheet` to
   outrank them (marker, `max-content` width, margins).

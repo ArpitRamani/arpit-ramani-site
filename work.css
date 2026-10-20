@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------------
    The portfolio, as the landing card one step further.
 
-   Loaded after min.css and leans on it for the tokens, the type, .hi, .glitch,
-   .sr-only and .back. Same column, same monochrome, same scramble. The page
+   Loaded after min.css and leans on it for the tokens, the type, .hi and
+   .back. Same column, same monochrome, same landscape behind it. The page
    is a handful of lists behind a handful of words, and only one list is on
    screen at a time, so it reads like the landing page rather than like a CV.
    --------------------------------------------------------------------------- */
