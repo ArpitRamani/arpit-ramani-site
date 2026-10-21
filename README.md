@@ -3,7 +3,7 @@
 ```
 index.html      the door. One paragraph, one link, four icons.
 min.css         its stylesheet (and the shared tokens/type for every page)
-field.js        the band of dots along the bottom of every page (contact.json)
+field.js        the field of dots behind every page (contact.json)
 
 portfolio.html  everything else: experience, projects, awards, education and
                 stack, one list at a time behind a row of words. Each row
@@ -55,16 +55,18 @@ python3 -m http.server 8000
 ## Notes: the background (`field.js`, `contact.json`, `data/contact.py`)
 
 - **It is the SpCas9 coevolution map** behind the insertion-tolerance model:
-  mean-field DCA couplings (APC-corrected), max-pooled into 90x90 blocks and
-  turned 45 degrees so the diagonal lies flat, like a Hi-C map. Only the band
-  within 16 blocks of the diagonal is kept. Dot size is coupling strength.
-- **`data/contact.py` rebuilds `contact.json`** (~6 KB) from the local
+  mean-field DCA couplings (APC-corrected), max-pooled into 120x120 blocks
+  and stretched over the window, so the diagonal runs corner to corner.
+  Values under the 70th percentile are blank. Dot size is coupling strength.
+- **Dots fade to 30% behind the text column** (`main`, `.wrap` or
+  `article`), measured on resize, so the diagonal never fights the copy.
+- **`data/contact.py` rebuilds `contact.json`** (~14 KB, ~4 KB gzipped) from the local
   `dca_matrix.npz`; the matrix itself is not in this repo.
 - **One motif, small uniform marks, low contrast.** Earlier attempts (contour
   landscape, optimizer dots, helix and molecule art, a rotating Cas9 trace)
   drew *things* and read as busy; this is the restraint they lacked.
-- **The only motion is a slow wave of dot size** along the band (14s per
-  wavelength), at ~30fps; `prefers-reduced-motion` gets the still band.
+- **The only motion is a slow wave of dot size** along the diagonal (14s per
+  wavelength), at ~30fps; `prefers-reduced-motion` gets the still field.
 
 ## Notes: the landing page (`index.html`, `min.css`)
 
