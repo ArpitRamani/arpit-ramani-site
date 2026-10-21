@@ -8,7 +8,8 @@
    still coevolve. A dot's size is how strongly. contact.json is built by
    data/contact.py.
 
-   Dots are faded behind the text column so nothing competes with reading.
+   Dots shrink away as they near the text and none sit behind it, so
+   nothing competes with reading.
    A slow wave of size runs along the diagonal, nothing else moves. Reduced
    motion gets the still field. No dependency.
    --------------------------------------------------------------------------- */
@@ -16,7 +17,8 @@
 const WAVE_S = 14;        /* seconds for the wave to cross one wavelength */
 const WAVELEN = 0.35;     /* as a fraction of the diagonal */
 const DEPTH = 0.22;       /* how far the wave swells and shrinks a dot */
-const BEHIND_TEXT = 0.3;  /* dot opacity behind the text column */
+const CLEAR = 28;         /* px of empty space kept around the text */
+const EDGE = 140;         /* px over which dots grow back to full size */
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const canvas = document.createElement('canvas');
@@ -27,9 +29,8 @@ const ctx = canvas.getContext('2d');
 
 const css = getComputedStyle(document.documentElement);
 const DOT = css.getPropertyValue('--dots').trim() || '#c4c1bb';
-const BG = css.getPropertyValue('--bg').trim() || '#ffffff';
 
-let W = 0, H = 0, map = null, dots = [], fade = null;
+let W = 0, H = 0, map = null, dots = [];
 
 function resize() {
   const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -37,6 +38,20 @@ function resize() {
   canvas.width = Math.round(W * dpr);
   canvas.height = Math.round(H * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  /* the box holding the text; if it is taller than the window it scrolls,
+     so keep the whole column clear top to bottom. On a phone the column is
+     the whole width, so there dots only thin out instead of vanishing. */
+  const box = document.querySelector('main, .wrap, article');
+  const b = box ? box.getBoundingClientRect() : { left: W / 2 - 352, right: W / 2 + 352, top: 0, bottom: H };
+  const tall = b.bottom - b.top > H * 0.9;
+  const top = tall ? -Infinity : b.top - CLEAR, bottom = tall ? Infinity : b.bottom + CLEAR;
+  const left = b.left - CLEAR, right = b.right + CLEAR;
+  const floor = b.right - b.left > W * 0.85 && tall ? 0.35 : 0;
+  const near = (x, y) => {
+    const dx = Math.max(left - x, 0, x - right), dy = Math.max(top - y, 0, y - bottom);
+    return Math.max(floor, Math.min(1, Math.hypot(dx, dy) / EDGE));
+  };
 
   /* lay a square lattice over the window and read each point off the map */
   const step = Math.min(20, Math.max(14, W / 90));
@@ -48,22 +63,11 @@ function resize() {
     for (let i = 0; i < cols; i++) {
       const v = map.v[Math.floor(j / rows * map.N) * map.N + Math.floor(i / cols * map.N)];
       if (!v) continue;
-      const x = ox + i * step, y = oy + j * step;
-      dots.push({ x, y, r: (0.45 + 2.4 * v ** 0.8) * unit, p: (x / W + y / H) / 2 });
+      const x = ox + i * step, y = oy + j * step, k = near(x, y);
+      if (k < 0.15) continue;
+      dots.push({ x, y, r: (0.45 + 2.4 * v ** 0.8) * unit * k, p: (x / W + y / H) / 2 });
     }
   }
-
-  /* soften the dots behind whatever holds the text */
-  const box = document.querySelector('main, .wrap, article');
-  const rect = box ? box.getBoundingClientRect() : { left: W / 2 - 352, right: W / 2 + 352 };
-  const l = Math.max(0, rect.left - 24), r = Math.min(W, rect.right + 24), edge = 72;
-  fade = ctx.createLinearGradient(0, 0, W, 0);
-  const clear = BG + '00', hide = BG + Math.round((1 - BEHIND_TEXT) * 255).toString(16).padStart(2, '0');
-  const at = (x) => Math.min(1, Math.max(0, x / W));
-  fade.addColorStop(at(l - edge), clear);
-  fade.addColorStop(at(l), hide);
-  fade.addColorStop(at(r), hide);
-  fade.addColorStop(at(r + edge), clear);
 }
 
 function draw(t) {
@@ -77,8 +81,6 @@ function draw(t) {
     ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
   }
   ctx.fill();
-  ctx.fillStyle = fade;
-  ctx.fillRect(0, 0, W, H);
 }
 
 let raf = 0, last = 0;
@@ -101,7 +103,11 @@ fetch(new URL('contact.json', import.meta.url))
   .then((m) => {
     map = { N: m.N, v: Array.from(m.v, (c) => parseInt(c, 36) / 35) };
     resize();
-    addEventListener('resize', () => { resize(); if (reduced.matches) start(); });
+    const again = () => { resize(); if (reduced.matches) start(); };
+    addEventListener('resize', again);
+    /* expanding an entry or a late font changes the text box */
+    const box = document.querySelector('main, .wrap, article');
+    if (box) new ResizeObserver(again).observe(box);
     reduced.addEventListener('change', start);
     start();
   })

@@ -58,8 +58,10 @@ python3 -m http.server 8000
   mean-field DCA couplings (APC-corrected), max-pooled into 120x120 blocks
   and stretched over the window, so the diagonal runs corner to corner.
   Values under the 70th percentile are blank. Dot size is coupling strength.
-- **Dots fade to 30% behind the text column** (`main`, `.wrap` or
-  `article`), measured on resize, so the diagonal never fights the copy.
+- **No dots around the text.** Dots shrink to nothing within ~140px of the
+  text box (`main`, `.wrap` or `article`, re-measured when it resizes). A box
+  taller than the window keeps its whole column clear; on a phone, where the
+  column is the full width, dots thin out instead of vanishing.
 - **`data/contact.py` rebuilds `contact.json`** (~14 KB, ~4 KB gzipped) from the local
   `dca_matrix.npz`; the matrix itself is not in this repo.
 - **One motif, small uniform marks, low contrast.** Earlier attempts (contour
